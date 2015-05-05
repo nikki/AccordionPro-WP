@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Accordion Pro WP Examples</title>
+    <link rel="stylesheet" href="../css/accordionpro.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <style>
+        body { background: #EEEEEE; padding-bottom: 60px }
+        pre { background: #FEFEFE; margin-bottom: 60px }
+        .container { max-width: 900px }
+        h1, .container > h2, h3 { text-shadow: 1px 1px 0 white }
+        h1 { font-size: 28px; margin: 30px 0 }
+        .container > h2, h3 { margin-top: 20px; font-size: 21px; border-bottom: 1px solid #333; box-shadow: 0 1px 0 white }
+        h3 { font-size: 16px; line-height: 28px }
+        .linkable, .links, .note { overflow: hidden; margin-top: 30px; margin-bottom: 0 }
+        .links { margin-top: 20px }
+        .links li { float: left; margin-right: 22px }
+        .links + h2 { clear: both }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="../js/jquery.accordionpro.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Accordion Pro WP Examples</h1>
+
+        <h2>Stitch theme</h2>
+        <div id="one">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                function callback() {
+                    $('#one').find('.ap-caption').each(function() {
+                        if (!$(this).parents('.slide').hasClass('selected')) {
+                            $(this).fadeOut();
+                        } else {
+                            if (!$(this).is(':visible')) $(this).fadeIn();
+                        }
+                    });
+                }
+
+                $('#one').accordionPro({
+                    autoPlay : true,
+                    onSlideOpen : callback,
+                    onSlideClose : callback,
+                    theme : 'stitch',
+                    rounded : true
+                }).find('.ap-caption:first').show();
+            </script>
+        </div>
+
+        <h3>Options used:</h3>
+        <pre>
+{
+    autoPlay : true,
+    theme : 'stitch',
+    rounded : true
+}</pre>
+
+        <h2>Transparent theme</h2>
+        <div id="two">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                $('#two').accordionPro({
+                    theme : 'transparent',
+                    linkable : true
+                });
+            </script>
+        </div>
+
+        <p class="linkable">
+            <b>Note:</b> when the <b>linkable</b> option is set, you can link to slides by using #yourDivId-slide-1, #yourDivId-slide-2, etc. in the link's href attribute.
+        </p>
+
+        <ul class="links">
+            <li>Links:</li>
+            <li><a href="#two-slide-1">#two-slide-1</a></li>
+            <li><a href="#two-slide-2">#two-slide-2</a></li>
+            <li><a href="#two-slide-3">#two-slide-3</a></li>
+            <li><a href="#two-slide-4">#two-slide-4</a></li>
+            <li><a href="#two-slide-5">#two-slide-5</a></li>
+        </ul>
+
+        <h3>Options used:</h3>
+        <pre>
+{
+    theme : 'transparent',
+    linkable : true
+}</pre>
+
+        <h2>Dark theme</h2>
+        <div id="three">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                $('#three').accordionPro({
+                    autoPlay : true,
+                    startClosed : true,
+                    orientation : 'vertical',
+                    theme : 'dark',
+                    rounded : true
+                });
+            </script>
+        </div>
+
+        <p class="note">
+            <b>Note:</b> if you don't want images to be stretched to fit the slides as they are above, set the <b>scaleImages</b> option to <b>false</b>.
+        </p>
+
+        <h3>Options used:</h3>
+        <pre>
+{
+    autoPlay : true,
+    startClosed : true,
+    orientation : 'vertical',
+    theme : 'dark',
+    rounded : true
+}</pre>
+
+        <h2>Light theme</h2>
+        <div id="four">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                $('#four').accordionPro({
+                    startClosed : true,
+                    theme : 'light'
+                });
+            </script>
+        </div>
+
+        <p class="note">
+            <b>Note:</b> by popular request, you can now start the plugin in a closed position!
+        </p>
+
+        <h3>Options used:</h3>
+        <pre>
+{
+    startClosed : true,
+    theme : 'light'
+}</pre>
+
+        <h2>Basic theme</h2>
+        <div id="five">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                $('#five').accordionPro({
+                    theme : 'basic',
+                    rtl : true
+                });
+            </script>
+        </div>
+
+        <p class="note">
+            <b>Note:</b> another oft-requested feature, right-to-left support, has also been implemented in this version.
+        </p>
+
+        <h3>Options used:</h3>
+        <pre>
+{
+    theme : 'basic',
+    rtl : true
+}</pre>
+
+    </div>
+
+</body>
+</html>

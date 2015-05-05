@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Accordion Pro - a responsive accordion plugin for jQuery</title>
+		<style>
+			html { overflow-y: scroll }
+			body { font: 14px/24px 'Helvetica Neue', Arial, sans-serif; color: #333; width: 960px; margin: 30px auto 60px; background: #fff }
+			.wrapper { max-width: 900px; margin: 0 auto }
+			h1, dd { margin: 0 }
+			dt { font-weight: bold }
+			figure { display: block; width: 100%; height: 100%; margin: 0 }
+			figcaption { padding: 10px 15px; position: absolute; bottom: 20px; right: 30px; z-index: 3; background: black; background: rgba(0,0,0,0.7); color: white;
+				-webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px }
+			.options h2 { margin: 30px 0 15px; text-shadow: 1px 1px 0 white; border-bottom: 2px solid #333; padding-bottom: 5px }
+			.options p { width: 48%; float: left; margin: 5px 0 }
+			p.heading, p.reset, .output { width: 100%; float: left; clear: left }
+			.output { position: relative }
+			.output h2 a { content: ''; position: absolute; top: 30px; right: 0; font-size: 14px; font-weight: normal; color: #333; text-decoration: none }
+			.output h2 a:hover { text-decoration: underline }
+			label { display: inline-block; width: 160px }
+			select { width: 160px; margin-right: 20px }
+			input[type='text'] { width: 40px }
+			textarea { width: 50%; height: 100px; font-family: monospace }
+			section { height: 100%; width: 100%; background: white; overflow-y: scroll }
+		</style>
+		<link rel="stylesheet" href="../../build/accordionpro_js/css/accordionpro.min.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="../../build/accordionpro_js/js/jquery.accordionpro.min.js"></script>
+		<!--[if lt IE 9]>
+			<script>
+				document.createElement('figure');
+				document.createElement('figcaption');
+			</script>
+		<![endif]-->
+        <!--[if lt IE 8]>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+
+		<div class="wrapper">
+			<div id="demo">
+			  <ol>
+					<li>
+					    <h2><span>Slide One</span></h2>
+					    <div>
+							<figure>
+								<img src="../../build/accordionpro_js/img-demo/1.jpg" alt="image" />
+								<figcaption class="ap-caption">Slide One</figcaption>
+							</figure>
+						</div>
+					</li>
+					<li>
+					    <h2><span>Slide Two</span></h2>
+					    <div>
+							<figure>
+								<img src="../../build/accordionpro_js/img-demo/2.jpg" alt="image" />
+								<figcaption class="ap-caption">Slide Two</figcaption>
+							</figure>
+						</div>
+					</li>
+					<li>
+					    <h2><span>Slide Three</span></h2>
+					    <div>
+							<figure>
+								<img src="../../build/accordionpro_js/img-demo/3.jpg" alt="image" />
+								<figcaption class="ap-caption">Slide Three</figcaption>
+							</figure>
+						</div>
+					</li>
+					<li>
+					    <h2><span>Slide Four</span></h2>
+					    <div>
+							<figure>
+								<img src="../../build/accordionpro_js/img-demo/4.jpg" alt="image" />
+								<figcaption class="ap-caption">Slide Four</figcaption>
+							</figure>
+						</div>
+					</li>
+					<li>
+					    <h2><span>Slide Five</span></h2>
+					    <div>
+							<figure>
+								<img src="../../build/accordionpro_js/img-demo/5.jpg" alt="image" />
+								<figcaption class="ap-caption">Slide Five</figcaption>
+							</figure>
+						</div>
+					</li>
+			    </ol>
+				<noscript>
+					<p>Please enable JavaScript to get the full experience.</p>
+				</noscript>
+			</div>
+		</div>
+
+		<div class="options">
+			<h2>Demo Suite</h2>
+			<p class="heading">
+				Test the options for the accordionPro plugin by changing the options below.<br />
+				Hit <b>enter</b> to see changes when entering a custom value, and use <b>reset</b> to start again.<br />
+				Toggle the output view to get the code for your custom settings object.
+			</p>
+			<p class="reset">
+				<input id='reset' type='button' value='reset' />
+			</p>
+			<p>
+			    <label for="theme">theme</label>
+				<select id="theme" name="theme">
+			    	<option value="basic">basic</option>
+					<option value="dark">dark</option>
+					<option value="light">light</option>
+					<option value="stitch">stitch</option>
+					<option value="transparent">transparent</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="easing">easing</label>
+				<select id="easing" name="easing"></select>
+			</p>
+			<p>
+			    <label for="containerWidth">containerWidth</label>
+				<select id="containerWidth" name="containerWidth">
+			    	<option value="960">default (960px)</option>
+					<option value="custom">... or enter a custom value</option>
+			    </select>
+			</p>
+			<p>
+				<label for="containerHeight">containerHeight</label>
+			    <select id="containerHeight" name="containerHeight">
+			    	<option value="320">fixed (320px)</option>
+					<option value="custom">... or enter a custom numeric value</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="tabWidth">tabWidth</label>
+				<select id="tabWidth" name="tabWidth">
+			    	<option value="48">fixed (48px)</option>
+					<option value="custom">... or enter a custom numeric value</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="activateOn">activateOn</label>
+				<select id="activateOn" name="activateOn">
+			    	<option value="click">click</option>
+					<option value="mouseover">mouseover</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="firstSlide">firstSlide</label>
+				<select id="firstSlide" name="firstSlide">
+			    	<option value="1">1</option>
+					<option value="custom">... or enter a custom numeric value</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="slideSpeed">slideSpeed</label>
+				<select id="slideSpeed" name="slideSpeed">
+			    	<option value="800">800</option>
+					<option value="custom">... or enter a custom numeric value</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="autoPlay">autoPlay</label>
+				<select id="autoPlay" name="autoPlay">
+			    	<option value="false">false</option>
+					<option value="true">true</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="pauseOnHover">pauseOnHover</label>
+				<select id="pauseOnHover" name="pauseOnHover">
+			    	<option value="false">false</option>
+					<option value="true">true</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="cycleSpeed">cycleSpeed</label>
+				<select id="cycleSpeed" name="cycleSpeed">
+			    	<option value="6000">6000</option>
+					<option value="custom">... or enter a custom numeric value</option>
+			    </select>
+			</p>
+			<p>
+			    <label for="rounded">rounded</label>
+				<select id="rounded" name="rounded">
+			    	<option value="false">false</option>
+					<option value="true">true</option>
+			    </select>
+			</p>
+			<p>
+			  <label for="showSlideNumbers">showSlideNumbers</label>
+				<select id="showSlideNumbers" name="showSlideNumbers">
+			    	<option value="false">false</option>
+					<option value="true">true</option>
+			    </select>
+			</p>
+			<p>
+			  <label for="linkable">linkable</label>
+				<select id="linkable" name="linkable">
+			    <option value="false">false</option>
+					<option value="true">true</option>
+				</select>
+			</p>
+			<p>&nbsp;</p>
+			<p>
+			    (slide
+			    <a href="#demo-slide-1">one</a>
+			    <a href="#demo-slide-2">two</a>
+			    <a href="#demo-slide-3">three</a>
+			    <a href="#demo-slide-4">four</a>
+			    <a href="#demo-slide-5">five</a>)
+			</p>
+			<div class="output">
+				<h2>Output<a href="#">toggle code view</a></h2>
+				<textarea>$("#yourAccordion").accordionPro();</textarea>
+			</div>
+		</div>
+
+	<script src="js/demosuite.js"></script>
+	<script>
+	    // analytics
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-17442910-1']);
+	    _gaq.push(['_trackPageview']);
+
+	    (function() {
+	        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+	</script>
+
+	</body>
+</html>

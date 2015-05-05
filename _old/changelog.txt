@@ -1,0 +1,16 @@
+CHANGELOG
+
+v2.0 - 25/09/2013
+
+v1.1 - 10/09/2012
+  - introduced shortcode support
+    - NB: embedded shortcodes must be executable outside of 'the loop' to work, some plugins don't support this
+  - fixed Chrome animation artifacts bug
+  - fixed FF15 stitch theme bug
+
+v1.0.1 - 06/02/12
+ - Corrected folder name
+ - Added 'wmode' to list of permitted attributes
+
+v1.0 - 04/02/12
+ - Initial release

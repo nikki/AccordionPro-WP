@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Accordion Pro WP Documentation</title>
+    <link rel="stylesheet" href="../css/accordionpro.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <style>
+        body { background: #EEEEEE; padding-bottom: 60px }
+        .container { max-width: 900px }
+        #demo { text-align: center; margin: 30px auto 0 }
+        #docs h1, #docs h2 { text-shadow: 1px 1px 0 white }
+        #docs h1 { font-size: 28px; margin: 30px 0 0 }
+        #docs h2 { margin-top: 40px; font-size: 21px; border-bottom: 1px solid #333; box-shadow: 0 1px 0 white }
+        pre { background: #FEFEFE }
+        strong { display: inline-block; margin-top: 15px }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="../js/jquery.accordionpro.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div id="demo">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                $('#demo').accordionPro({ theme : 'dark', autoPlay : true });
+            </script>
+        </div>
+
+        <div id="docs">
+            <h1>Accordion Pro WP</h1>
+            <p>A Responsive Accordion Plugin for WordPress by <a href="http://nicolahibbert.com">Nicola Hibbert</a></p>
+
+            <h2>Hello!</h2>
+            <p>Thank you for purchasing Accordion Pro WP!</p>
+            <p>Before we begin with the setup, I’d like to make one important point: Accordion Pro WP uses the <em>wp_editor()</em> functionality that was implemented in WordPress 3.3, so you need to ensure that your WordPress installation is up to date before continuing.</p>
+
+            <h2>Installation</h2>
+            <p>To install the plugin you will need to upload the folder called <em>accordion_pro</em> to your WordPress plugins directory. You can accomplish this in one of two ways: you can either use an FTP client to upload the unzipped folder, or you can use the upload function contained within your WordPress admin panel.</p>
+            <strong>Upload via FTP:</strong>
+            <p>Use your ftp client to upload the accordion_pro folder to /wp-content/plugins/ folder on your server.</p>
+            <strong>Upload with WordPress:</strong>
+            <p>In your WordPress admin panel, browse to Plugins > Add New > Upload. Click Choose File, select the zipped plugin, and click Install Now.</p>
+
+
+            <h2>Activation</h2>
+            <p>Once the <em>accordion_pro</em> folder has been uploaded, you can activate the plugin. Go to your WordPress admin panel and select the ‘Plugins’ menu option. You should see a new plugin listed, Accordion Pro. Click Activate to activate the plugin.</p>
+
+            <h2>Using the Plugin</h2>
+            <p>Once the plugin has been activated, a new menu panel called Accordion Pro will appear underneath ‘Settings’. There are two menu options: ‘Manage Accordions’ and ‘Create Accordions’.</p>
+
+            <h2>Creating your First Accordion</h2>
+            <p>Click the submenu entry entitled ‘Create Accordions’. This will take you to the accordion creation and editing page. The first slide of your new accordion is automatically created for you.</p>
+            <p>Begin by entering a title for your first slide – this will be displayed on the horizontally on the ‘spine’ of your slide. Titles are optional.</p>
+            <p>Next, enter a caption for your slide. This will be displayed when the slide is activated, and hidden when the slide closes. Captions are also optional, and can be toggled on and off.</p>
+            <p>Content can be entered using the Visual or HTML content editors. Any valid HTML content (e.g. images, video, Canvas, etc.) can be displayed in a slide. If you plan to use Flash videos in your slides, remember to set the wmode parameter to <em>transparent</em>. This will fix the z-index issue and stop the video overlapping the other slides.</p>
+            <p>To add a new slide, click the ‘Add Another Slide’ button located at the bottom of the editing page.</p>
+            <p>To remove a slide, click the ‘Remove Slide’ button located underneath the slide’s content editor.</p>
+            <h2>Accordion Options</h2>
+            <p>Each accordion has it’s own set options. You can create multiple accordions with different styles and effects and embed them within the same post or page.
+                Below is a brief description of what each of the options does:</p>
+
+                        <pre>
+            /* layout */
+            orientation : 'horizontal',             // 'horizontal' or 'vertical' accordion
+            startClosed : false,                    // start in a closed position
+            firstSlide : 1,                         // displays slide (n) on page load
+
+            /* aesthetics */
+            theme : 'basic',                        // basic, dark, light, stitch or transparent
+            rounded : false,                        // square or rounded corners
+            rtl : false,                            // right to left layout
+            showSlideNumbers : true,                // display numbers on slides
+
+            /* horizontal accordion options */
+            responsive : true,                      // accordion will adapt itself to the page layout, based on width of parent element
+            scaleImages : true,                     // scales images to fit slide width and height
+            horizontalWidth : 900,                  // base width; fixed (px [integer]) - responsive scaling is relative to this value
+            horizontalHeight : 300,                 // base horizontal accordion height; fixed (px [integer]) - responsive scaling is relative to this value
+
+            /* vertical accordion options */
+            verticalWidth : '100%',                 // fixed (px [integer]) or fluid (% [string])
+            verticalHeight : 500,                   // base vertical accordion height; fixed (px [integer])
+            verticalSlideHeight : 'fixed',          // vertical accordion slide heights can be 'fixed' or 'fitToContent'
+
+            /* events */
+            activateOn : 'click',                   // click or mouseover
+            touchEnabled : true,                    // touch events?
+            onSlideOpen : function() {},            // callback on slide open
+            onSlideClose : function() {},           // callback on slide animation complete
+
+            /* animations */
+            autoPlay : false,                       // automatically cycle through slides
+            cycleSpeed : 6000,                      // time between slide cycles
+            slideSpeed : 800,                       // slide animation speed
+            easing : 'ease-in-out',                 // animation easing
+
+            /* miscellaneous */
+            pauseOnHover : true,                    // pause on hover
+            linkable : false                        // link slides via hash</pre>
+
+            <h2>Inserting an Accordion into a Post or Page</h2>
+            <p>After saving your accordion, you’ll see a notification that the accordion has been saved successfully, accompanied by a link to the management screen. Click the link in the notification, or click the link entitled ‘Manage Accordions’ in the Accordion Pro submenu to visit the management screen.</p>
+            <p>The management screen contains the shortcode required to insert your newly created accordion into your WordPress post or page. Select the shortcode relating to your accordion, and copy it. Then visit the page you want to insert it into, and paste the shortcode in. Save your post and browse to it to see your new accordion.</p>
+            <p>To edit or delete an accordion, click the edit or delete links on the relevant accordion on the management screen.</p>
+
+            <h2>Credits</h2>
+            <p>This plugin wouldn't be possible if it weren't for the open-source efforts of others.  Many thanks to:</p>
+            <ul>
+                <li>Orman Clark for the original <a href="http://www.premiumpixels.com/freebies/horizontal-accordion-slider-psd/">accordion design</a>;</li>
+                <li>Jason Garber for his <a href="https://github.com/jgarber623/jquery-swipe">jQuery Swipe plugin</a>;</li>
+                <li>The <a href="http://modernizr.com/">Modernizr</a> team;</li>
+                <li>Addy Osmani for the <a href="http://addyosmani.com/blog/css3transitions-jquery/">CSS3 Transitions shim</a>;</li>
+                <li>and David DeSandro for the <a href="https://github.com/desandro/imagesloaded">Images Loaded</a> plugin.</li>
+            </ul>
+            <p>Thanks a bunch guys n' gals!</p>
+
+            <h2>Thank you!</h2>
+            <p>I hope you have fun with your new plugin.  If you have any questions that aren’t covered by this document, then please don’t hesitate to get in touch.</p>
+        </div>
+    </div>
+</body>
+</html>

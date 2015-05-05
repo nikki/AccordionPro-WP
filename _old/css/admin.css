@@ -1,0 +1,32 @@
+.wrap { min-width: 800px }
+
+.ap-left { float: left; clear: left; width: 100%; margin-right: -325px }
+.ap-right { float: right; clear: right; width: 300px }
+
+.ap-slides { margin: 0 325px 0 5px }
+.ap-slide.ajax { display: none }
+.ap-slide h3 { font-size: 14px; line-height: 18px;
+	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times,serif; cursor: default !important }
+.ap-slide .ap-controls { padding: 0 10px }
+.ap-slide .ap-inner { padding: 10px }
+.ap-slide .ap-inner label { display: inline-block; width: 75px }
+.ap-slide .ap-inner .ap-slide-caption-enabled { margin-left: 10px; display: inline }
+.ap-slides #ap-add { float: left }
+.ap-slides .ap-remove { margin-top: 10px }
+.ap-slides .ap-wait { margin: 4px 0 0 4px; display: none; height: 16px; width: 16px; background: url('wpspin_light.gif') no-repeat }
+.ap-slides .ap-save { float: right; display: inline-block }
+
+.ap-options { width: 285px; margin: 0 auto }
+.ap-options .postbox h3 { cursor: default }
+.ap-options .accordionName { margin-bottom: 0 }
+.ap-options .accordionName label { display: inline-block; width: 60px }
+.ap-options .accordionName input { margin: 0; width: 162px }
+.ap-options .inside { margin-bottom: 5px }
+.ap-options p.submit { overflow: hidden; margin: 0; padding-bottom: 0.9em }
+.ap-options .button-primary { float: left }
+.ap-options label,
+.ap-options select,
+.ap-options input { display: inline-block; width: 40% }
+.ap-options label { width: 56%; margin-right: 3% }
+.ap-options .tooltip { position: absolute; top: 10px; left: 10px; z-index: 100; display: none; padding: 5px 10px;
+  background: #21759B; color: white; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); border-radius: 3px }

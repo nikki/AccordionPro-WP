@@ -1,0 +1,19 @@
+{
+  "name": "Accordion-Pro-WP",
+  "version": "0.0.0",
+  "homepage": "https://github.com/nikki/Accordion-Pro-WordPress",
+  "authors": [
+    "Nikki <nikki@nicolahibbert.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "jasmine-jquery": "~2.0.5",
+    "jquery": "1.11.1"
+  }
+}

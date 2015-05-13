@@ -56,7 +56,7 @@ if (!class_exists('WP')) {
 								<?php
 									// textarea id must be alphanumeric
 									wp_editor(stripslashes($content), 'apeditor'.($key + 1), $settings);
-									if ($key) echo '<input class="ap-remove" type="button" value="'.__('Remove Slide '.($key + 1), 'accordion_pro').'" data-confirm="'.__('Are you sure you want to remove this slide?', 'accordion_pro').'" />';
+									if ($key) echo '<input class="ap-remove button-secondary" type="button" value="'.__('Remove Slide '.($key + 1), 'accordion_pro').'" data-confirm="'.__('Are you sure you want to remove this slide?', 'accordion_pro').'" />';
 								?>
 								<input type="hidden" id="ap-slide-<?php echo $key + 1; ?>" class="ap-slide-num" value="<?php echo $key + 1; ?>" />
 							</div>
@@ -241,7 +241,7 @@ if (!class_exists('WP')) {
         echo "<h3>$section</h3>";
         foreach ($def as $key => $value) {
             echo "<div class='inside'>";
-            echo "<label class='control-label span2' for='$key'>$key</label>";
+            echo "<label class='control-label span2' for='$key'><span>?</span>$key</label>";
             foreach ($value as $k => $v) {
               if ($k == 'value') {
                 $t = gettype($v);

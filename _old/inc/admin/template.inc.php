@@ -15,10 +15,12 @@
 			<input name="content_caption_enabled[<?php echo $key; ?>]" id="ap-slide-caption-enabled-<?php echo $key + 1; ?>" class="ap-slide-caption-checkbox" type="checkbox" />
 		</div>
 		<div id="wp-apeditor<?php echo $key + 1; ?>-editor-tools" class="wp-editor-tools">
-			<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html">HTML</a>
-			<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce">Visual</a>
 			<div id="wp-apeditor<?php echo $key + 1; ?>-media-buttons" class="wp-media-buttons">
-				<a href="#" class="add-media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><img src="<?php echo WP_PLUGIN_URL; ?>/accordionpro_wp/css/media-button.png" width="15" height="15"> Add Media</a>
+				<a href="#" class="button insert-media add-media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><img src="<?php echo WP_PLUGIN_URL; ?>/accordionpro_wp/css/media-button.png" width="15" height="15"> Add Media</a>
+			</div>
+			<div class="wp-editor-tabs">
+				<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce">Visual</a>
+				<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html">Text</a>
 			</div>
 		</div>
 		<div id="wp-apeditor<?php echo $key + 1; ?>-editor-container" class="wp-editor-container">

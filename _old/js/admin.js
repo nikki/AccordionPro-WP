@@ -1,13 +1,49 @@
 jQuery(function($) {
   var slides = $('.ap-slides'),
+      version = (typeof tinyMCE !== 'undefined' ? +tinyMCE.majorVersion : 3),
+      command = (version <= 3 ? 'Control' : 'Editor'),
+
+  // mce[Add/Remove]Control = v3
+  // mce[Add/Remove]Editor = v4
 
   accordionPro = {
+    initEditor : function(res, len) {
+      var args = {
+            elements : 'apeditor' + (len + 1)
+          }, i = 1, j;
+
+      // insert html
+      $('#ap-add').before(res);
+
+      // init tinymce
+      tinyMCE.init(args);
+
+      // configure quicktags
+      quicktags({
+        id: args.elements
+      });
+
+      // init quicktags
+      QTags._buttonsInit();
+
+      // add editor
+      tinyMCE.execCommand('mceAdd' + command, false, args.elements);
+
+      // slide down new panel
+      $('#ap-add').prev().slideDown();
+    },
+
     addSlide : function() {
-      var spinner = $('.ap-slides .ap-wait'),
+      var _this = this,
+          spinner = $('.ap-slides .ap-wait'),
           clicked = false;
 
       spinner.ajaxStart(function() {
         spinner.css('display', 'inline-block');
+      });
+
+      spinner.ajaxStop(function() {
+        spinner.css('display', 'none');
       });
 
       slides.on('click', '#ap-add', function() {
@@ -25,35 +61,8 @@ jQuery(function($) {
                 slideNum : len
               }
             }, function(res) {
-              var args, i = 1, j;
-
-              // insert html
-              $('#ap-add').before(res);
-
-              // configure tinymce
-              for (j in tinyMCEPreInit.mceInit) {
-                if (i) args = tinyMCEPreInit.mceInit[j];
-                i--;
-              }
-
-              args.elements = 'apeditor' + (len + 1);
-
-              // configure quicktags
-              quicktags({
-                id: 'apeditor' + (len + 1),
-                buttons: "",
-                disabled_buttons: ""
-              });
-
-              // init tinymce & quicktags
-              tinyMCE.init(args);
-              QTags._buttonsInit();
-
-              // hide ajax spinner
-              spinner.hide();
-
-              // slide down new panel
-              $('#ap-add').prev().slideDown();
+              // init editor
+              _this.initEditor(res, len);
 
               // reset clicked flag
               clicked = false;
@@ -66,10 +75,13 @@ jQuery(function($) {
     removeSlide : function() {
       slides.on('click', '.ap-remove', function() {
         var $this = $(this),
-            num = $this.next().val();
+            num = +$this.next().val();
 
         if (confirm($this.attr('data-confirm'))) {
-          tinyMCE.execCommand('mceRemoveControl', false, 'apeditor' + (num + 1));
+          // remove editor instance
+          tinyMCE.execCommand('mceRemove' + command, false, 'apeditor' + num);
+
+          // slide panel up and remove
           $this.parent().parent().slideUp(function() { $(this).remove(); });
         }
       });
@@ -77,7 +89,7 @@ jQuery(function($) {
 
     toggleSlide : function(e) {
       slides.on('click', '.ap-toggle', function() {
-        $(this).parent().find('.ap-inner').toggle();
+        $(this).parent().toggleClass('inactive');
       });
     },
 
@@ -132,7 +144,7 @@ jQuery(function($) {
       slides.on('click', '.ajax .wp-switch-editor', function() {
         var $this = $(this),
           classname = $this.attr('class').split(' ')[1].split('-')[1],
-          $parent = $this.parent().parent();
+          $parent = $this.parent().parent().parent();
 
         switchEditors.switchto(this);
         $parent.removeClass().addClass('ap-inner ' + classname + '-active');
@@ -142,9 +154,12 @@ jQuery(function($) {
     addMedia : function() {
       slides.on('click', '.ajax .add-media', function(e) {
         var editor = this.id.split('-')[0];
-
         wpActiveEditor = editor;
-        tb_show('', 'media-upload.php?post_id=0&amp;TB_iframe=1&amp;width=640&amp;height=576');
+
+        // backwards compatibility
+        if (version <= 3) {
+          tb_show('', 'media-upload.php?post_id=0&amp;TB_iframe=1&amp;width=640&amp;height=576');
+        }
 
         e.preventDefault();
       });
@@ -160,11 +175,16 @@ jQuery(function($) {
     },
 
     showTooltip : function() {
-      $('.ap-options label').hover(function() {
-        $(this).next().show();
-      }, function() {
-        $(this).next().hide();
-      });
+      $('.ap-options .postbox')
+        .not(':eq(0)').find('label span')
+        .on({
+          mouseenter : function() {
+            $(this).parent().next().show();
+          },
+          mouseleave : function() {
+            $(this).parent().next().hide();
+          }
+        });
     },
 
     init : function() {

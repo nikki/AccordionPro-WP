@@ -1,12 +1,11 @@
 <?php
 /*
-Plugin Name:    Accordion Pro
-Plugin URI:     http://accordionpro.nicolahibbert.com
+Plugin Name:    Accordion Pro WP
+Plugin URI:     http://stitchui.com/accordion-pro-wp/
 Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.
-Version:        2.0.0
-Author:         Nicola Hibbert
-Author:         Mike Rogers
-Author URI:     http://nicolahibbert.com
+Version:        2.1.0
+Author:         Stitch UI
+Author URI:     http://stitchui.com
 Text Domain:    accordion_pro
 
 Copyright 2013  Nicola Hibbert
@@ -39,7 +38,7 @@ if (!class_exists('WP')) {
  * Define plugin version
  */
 
-define('ACCORDION_PRO_VERSION', '2.0.0');
+define('ACCORDION_PRO_VERSION', '2.1.0');
 
 /**
  * Require class
@@ -63,7 +62,7 @@ function init_options() {
   global $accordion_pro;
   $v = $accordion_pro->load_options();
 
-  if ($v['version'] != '2.0.0') {
+  if ($v['version'] != '2.1.0') {
     // run upgrade fn
     $accordion_pro->upgrade();
   }

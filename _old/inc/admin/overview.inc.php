@@ -74,7 +74,7 @@ if (!class_exists('WP')) {
     			<td><input type="text" value="[accordion_pro id='<?php echo $post->ID; ?>']" readonly /></td>
     			<td><input type="text" value="&lt;?php echo do_shortcode(&quot;[accordion_pro id='<?php echo $post->ID; ?>']&quot;); ?&gt;" readonly /></td>
     			<td><a href="admin.php?page=accordion_pro&mode=edit&id=<?php echo $post->ID; ?>"><?php _e('Edit', 'accordion_pro'); ?></a></td>
-    			<td><a href="<?php echo wp_nonce_url($url, 'delete', 'accordion_pro') ?>" class="ap-del-acc" data-confirm="<?php _e('Are you sure you want to delete ', 'accordion_pro'); echo $post->post_title; ?>?"><?php _e('Delete', 'accordion_pro'); ?></a></td>
+    			<td><a href="<?php echo wp_nonce_url($url, 'delete', 'accordion_pro'); ?>" class="ap-del-acc" data-confirm="<?php _e('Are you sure you want to delete ', 'accordion_pro'); echo $post->post_title; ?>?"><?php _e('Delete', 'accordion_pro'); ?></a></td>
     		</tr>
     <?php
         }

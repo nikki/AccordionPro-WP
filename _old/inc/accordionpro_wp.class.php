@@ -325,6 +325,11 @@ class accordion_pro {
       }
     }
 
+    // reformat content, but don't do it retroactively
+    // if you wanted to retroactively bugger up existing accordion html, you'd use
+    // wpautop on the content in update_accordionCache();
+    foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = wpautop($value);
+
     // The content title and content are arrays, so serialize them.
     $this->update_post_meta($post['ID'], 'content_title', base64_encode(serialize($_POST['content_title'])));
     $this->update_post_meta($post['ID'], 'content_caption', base64_encode(serialize($_POST['content_caption'])));

@@ -8,9 +8,11 @@ jQuery(function($) {
 
   accordionPro = {
     initEditor : function(res, len) {
-      var args = {
-            elements : 'apeditor' + (len + 1)
-          }, i = 1, j;
+      // copy settings from apeditor1 to subsequently (ajax created) slides
+      var args = jQuery.extend(true, {}, tinyMCEPreInit.mceInit.apeditor1);
+      args.elements = 'apeditor' + (len + 1);
+      args.selector = '#' + args.elements;
+      args.height = 172;
 
       // insert html
       $('#ap-add').before(res);
@@ -18,12 +20,8 @@ jQuery(function($) {
       // init tinymce
       tinyMCE.init(args);
 
-      // configure quicktags
-      quicktags({
-        id: args.elements
-      });
-
-      // init quicktags
+      // configure and init quicktags
+      quicktags({ id: args.elements });
       QTags._buttonsInit();
 
       // add editor
@@ -144,7 +142,10 @@ jQuery(function($) {
       slides.on('click', '.ajax .wp-switch-editor', function() {
         var $this = $(this),
           classname = $this.attr('class').split(' ')[1].split('-')[1],
-          $parent = $this.parent().parent().parent();
+          $parent = $this.parent().parent();
+
+        // backwards compatibility
+        if (version >= 4) $parent = $parent.parent();
 
         switchEditors.switchto(this);
         $parent.removeClass().addClass('ap-inner ' + classname + '-active');

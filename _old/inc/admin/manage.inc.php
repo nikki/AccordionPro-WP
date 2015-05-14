@@ -29,8 +29,7 @@ if (!class_exists('WP')) {
 
 			$settings = array(
 				'textarea_name' => 'content[]',
-				'teeny' => true,
-				'textarea_rows' => 6
+				'textarea_rows' => 8
 			);
 
 			if (!empty($accordion['acc_content']['content']) && is_array($accordion['acc_content']['content'])) {

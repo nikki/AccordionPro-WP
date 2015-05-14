@@ -12,7 +12,7 @@ jQuery(function($) {
       var args = jQuery.extend(true, {}, tinyMCEPreInit.mceInit.apeditor1);
       args.elements = 'apeditor' + (len + 1);
       args.selector = '#' + args.elements;
-      args.height = 172;
+      args.height = '172';
 
       // insert html
       $('#ap-add').before(res);

@@ -22,6 +22,7 @@
 .ap-slides .ap-remove { margin-top: 10px }
 .ap-slides .ap-wait { margin: 4px 0 0 4px; display: none; height: 16px; width: 16px; background: url('wpspin_light.gif') no-repeat }
 .ap-slides .ap-save { float: right; display: inline-block }
+.ap-slide iframe { height: 100% !important }
 
 .ap-options { width: 285px; margin: 0 auto }
 .ap-options .postbox h3 { cursor: default }

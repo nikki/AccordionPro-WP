@@ -15,10 +15,10 @@
 			<input name="content_caption_enabled[<?php echo $key; ?>]" id="ap-slide-caption-enabled-<?php echo $key + 1; ?>" class="ap-slide-caption-checkbox" type="checkbox" />
 		</div>
 
-<?php
-	global $wp_version;
-	if ($wp_version < 4) { // v3
-?>
+	<?php
+		global $wp_version;
+		if ($wp_version < 4) { // v3
+	?>
 		<div id="wp-apeditor<?php echo $key + 1; ?>-editor-tools" class="wp-editor-tools">
 			<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html">Text</a>
 			<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce">Visual</a>

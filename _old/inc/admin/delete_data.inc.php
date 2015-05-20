@@ -12,6 +12,7 @@ if (!is_admin() || !check_admin_referer('delete_data', 'accordion_pro')) die();
 $options = array(
   'version',
   'additional_css',
+  'enable_formatting',
   'newsletter'
 );
 

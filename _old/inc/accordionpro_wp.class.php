@@ -24,6 +24,7 @@ class accordion_pro {
   $options = array(
     'version'                   => ACCORDION_PRO_VERSION,
     'additional_css'            => '#my_accordion { background: none }',
+    'enable_formatting'         => false,
     'newsletter'                => false
   ),
   $accContent = array(
@@ -332,7 +333,7 @@ class accordion_pro {
     // reformat content, but don't do it retroactively
     // if you wanted to retroactively bugger up existing accordion html, you'd use
     // wpautop on the content in update_accordionCache();
-    foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = wpautop($value);
+    foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
 
     // The content title and content are arrays, so serialize them.
     $this->update_post_meta($post['ID'], 'content_title', base64_encode(serialize($_POST['content_title'])));
@@ -626,18 +627,17 @@ class accordion_pro {
 
   public function update_settings() {
     foreach ($this->options as $key => $value) {
-      $data = $_POST[$key]; // !!! TODO
+      if (isset($_POST[$key])) {
+        // get new setting
+        $setting = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
 
-      // only user-changable option now is for custom css, but sanitize fn is too greedy
-      // $this->set_option($key, $this->sanitize($_POST[$key]));
-      $data = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+        // set option
+        $this->set_option($key, $setting);
 
-      // set custom css option
-      $this->set_option($key, $data);
-
-      // write css to file (can't access WPDB from style php)
-      if ($key === 'additional_css') {
-        file_put_contents(WP_PLUGIN_DIR . '/accordionpro_wp/css/additional.css', $data);
+        // write css to file (can't access WPDB from style php)
+        if ($key === 'additional_css') {
+          file_put_contents(WP_PLUGIN_DIR . '/accordionpro_wp/css/additional.css', $setting);
+        }
       }
     }
 

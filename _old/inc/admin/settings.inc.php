@@ -27,6 +27,22 @@ if (!class_exists('WP')) {
       <?php wp_nonce_field('save_settings', 'accordion_pro'); ?>
     </form>
 
+    <form method="post" action="?page=accordion_pro_settings">
+      <div class="postbox">
+        <h3><label for="enable_formatting"><?php _e('Enable Auto Formatting', 'accordion_pro'); ?></label></h3>
+        <div class="inside">
+          <label>
+            <input type="hidden" name="enable_formatting" value="0" />
+            <input name="enable_formatting" id="enable_formatting" type="checkbox" <?php echo ($this->get_option('enable_formatting') ? 'checked' : ''); ?>>
+            Enable WordPress Auto Formatting within slides.
+          </label>
+          <p>Converts line-breaks in the visual editor to paragraph tags, and saves the paragraph tags as part of the HTML formatting for each slide. Leave this disabled if you prefer to hand-code your HTML.</p>
+          <input type="submit" name="save_settings" id="save_settings" class="button-primary" value="<?php _e('Save Settings', 'accordion_pro'); ?>">
+        </div>
+      </div>
+      <?php wp_nonce_field('save_settings', 'accordion_pro'); ?>
+    </form>
+
     <form method="post" action="?page=accordion_pro_settings&mode=delete_data" class="postbox">
       <h3><label for="delete_data"><?php _e('Delete Data', 'accordion_pro'); ?></label></h3>
       <div class="inside">

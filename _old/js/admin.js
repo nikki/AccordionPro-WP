@@ -188,6 +188,39 @@ jQuery(function($) {
         });
     },
 
+    subscribeToNewsletter : function() {
+      var $form = $('#ap-newsletter');
+
+      function showMessage(msg) {
+        $form
+          .next()
+          .empty()
+          .html(msg)
+          .fadeIn();
+      }
+
+      if ($form.length) {
+        $form.on('submit', function(e) {
+          $.getJSON(
+            this.action + "?callback=?",
+            $(this).serialize(),
+            function(data) {
+              if (data.Status === 200) {
+                $form
+                  .add($form.prev())
+                  .fadeOut(function() {
+                    showMessage('<b style="color:green">Success! </b>' + data.Message);
+                  });
+                $.post(ajaxurl, { action: 'set_newsletter_subscribed' });
+              } else {
+                showMessage('<b style="color:red">Error: </b>' + data.Message);
+              }
+          });
+          e.preventDefault();
+        });
+      }
+    },
+
     init : function() {
       this.addSlide();
       this.removeSlide();
@@ -198,6 +231,7 @@ jQuery(function($) {
       this.addMedia();
       this.removeAccordion();
       this.showTooltip();
+      this.subscribeToNewsletter();
     }
   };
 

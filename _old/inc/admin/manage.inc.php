@@ -13,7 +13,7 @@ if (!class_exists('WP')) {
 <h2 class="ap-title">
 	<?php
 		if ($clean['mode'] === 'add') {
-			_e('Create Accordion', 'accordion_pro');
+			_e('Create New Accordion', 'accordion_pro');
 		} else if ($clean['mode'] === 'edit') {
 			_e('Edit Accordion', 'accordion_pro');
 		}
@@ -105,9 +105,7 @@ if (!class_exists('WP')) {
 					    <label for="accordionName"><?php _e('Name', 'accordion_pro'); ?></label>
 						<input id="accordionName" name="accordionName" value="<?php echo $accordion['post_title']; ?>" required placeholder="<?php _e('Accordion Name', 'accordion_pro'); ?>" />
 					</p>
-					<p class="submit">
-	           <input type="submit" name="save_accordion" class="button-primary" value="<?php _e('Save Accordion', 'accordion_pro'); ?>" />
-	        </p>
+	        <input type="submit" name="save_accordion" class="button-primary" value="<?php _e('Save Accordion', 'accordion_pro'); ?>" />
 				</div>
 			</div>
 

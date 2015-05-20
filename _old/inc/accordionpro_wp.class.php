@@ -23,7 +23,8 @@ class accordion_pro {
   $notices,
   $options = array(
     'version'                   => ACCORDION_PRO_VERSION,
-    'additional_css'            => '#my_accordion { background: none }'
+    'additional_css'            => '#my_accordion { background: none }',
+    'newsletter'                => false
   ),
   $accContent = array(
     'content_title'             => array(),
@@ -128,6 +129,9 @@ class accordion_pro {
         )
       )
     );
+
+    // Enable set newsletter option via Ajax
+    add_action('wp_ajax_set_newsletter_subscribed', array($this, 'set_newsletter_subscribed'));
   }
 
   /**
@@ -597,7 +601,7 @@ class accordion_pro {
   public function load_options() {
     // Cycle through and update with the users settings.
     foreach ($this->options as $key => $value) {
-      $this->options[$key] = get_option('accordion_pro_'.$key, $value);
+      $this->options[$key] = get_option('accordion_pro_' . $key, $value);
     }
     return $this->options;
   }
@@ -642,6 +646,19 @@ class accordion_pro {
   }
 
   /**
+   * Set newsletter subscribed option
+   */
+
+  public function set_newsletter_subscribed() {
+    $this->set_option('newsletter', true);
+    wp_die();
+  }
+
+  /**
+   * PLUGIN HELPERS
+   */
+
+  /**
    * Affix the plugin name to post metas
    */
 
@@ -652,10 +669,6 @@ class accordion_pro {
   public function get_post_meta($id, $key) {
     return get_post_meta($id, 'accordion_pro_'.$key, true);
   }
-
-  /**
-   * PLUGIN HELPERS
-   */
 
   /**
    * Display notices if set

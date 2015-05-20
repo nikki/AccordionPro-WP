@@ -10,12 +10,9 @@ if (!is_admin() || !check_admin_referer('delete_data', 'accordion_pro')) die();
  */
 
 $options = array(
-  'loadCSS',
-  'loadjQuery',
-  'loadJS',
-  'loadJSEasing',
   'version',
-  'additional_css'
+  'additional_css',
+  'newsletter'
 );
 
 foreach($options as $key) {

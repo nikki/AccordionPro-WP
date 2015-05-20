@@ -20,7 +20,7 @@ if (!class_exists('WP')) {
     }
 ?>
 
-<h2><?php _e('Accordion Pro', 'accordion_pro'); ?> <a href="admin.php?page=accordion_pro_add" class="add-new-h2"><?php _e('Add New Accordion', 'accordion_pro'); ?></a></h2>
+<h2><?php _e('Manage Accordions', 'accordion_pro'); ?><a href="admin.php?page=accordion_pro_add" class="button button-primary alignright"><?php _e('Create New Accordion', 'accordion_pro'); ?></a></h2>
 
 <?php $this->display_notices(); ?>
 

@@ -1,6 +1,16 @@
 CHANGELOG
 
+v2.1 - 21/05/2015
+  - fixed bug introduced by WP4 (tabbing between visual and text editors)
+  - implemented TinyMCE Advanced support
+  - added option to enable auto formatting of slides
+
 v2.0 - 25/09/2013
+  - responsive
+  - touch-support
+  - CSS3 animations
+  - vertical accordions
+  - tons of other stuff
 
 v1.1 - 10/09/2012
   - introduced shortcode support
@@ -9,8 +19,7 @@ v1.1 - 10/09/2012
   - fixed FF15 stitch theme bug
 
 v1.0.1 - 06/02/12
- - Corrected folder name
- - Added 'wmode' to list of permitted attributes
+  - Added 'wmode' to list of permitted attributes
 
 v1.0 - 04/02/12
- - Initial release
+  - Initial release

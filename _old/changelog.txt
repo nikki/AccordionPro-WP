@@ -1,7 +1,7 @@
 CHANGELOG
 
 v2.1 - 21/05/2015
-  - fixed bug introduced by WP4 (tabbing between visual and text editors)
+  - fixed bug introduced in WP4 (tabbing between visual and text editors)
   - implemented TinyMCE Advanced support
   - added option to enable auto formatting of slides
 

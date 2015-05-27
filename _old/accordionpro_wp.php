@@ -4,24 +4,10 @@ Plugin Name:    Accordion Pro WP
 Plugin URI:     http://stitchui.com/accordion-pro-wp/
 Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.
 Version:        2.1.0
-Author:         Stitch UI
+Author:         Nicola Hibbert
 Author URI:     http://stitchui.com
 Text Domain:    accordion_pro
-
-Copyright 2013  Nicola Hibbert
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+Copyright:      (c) 2011-2015 Stitch UI
 */
 
 /**

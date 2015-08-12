@@ -12,7 +12,7 @@ module.exports = function (grunt) {
               ' * Author URI:     http://stitchui.com/accordion-pro-wp/\n' +
               ' * Text Domain:    accordion_pro\n' +
               ' * \n' +
-              ' * Copyright:      (c) 2010-2015 Stitch UI\n' +
+              ' * Copyright:      (c) 2011-2015 Stitch UI\n' +
               ' * \n' +
               ' * This program is free software; you can redistribute it and/or modify\n' +
               ' * it under the terms of the GNU General Public License, version 2, as\n' +
@@ -26,107 +26,48 @@ module.exports = function (grunt) {
               ' * You should have received a copy of the GNU General Public License\n' +
               ' * along with this program; if not, write to the Free Software\n' +
               ' * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA\n' +
-              ' */\n'//,
+              ' */\n',
 
-      // concat: {
-      //   banner: {
-      //     options: {
-      //       banner: '<%= banner %>'
-      //     },
-      //     files: [
-      //       { src: 'js/lib/jquery.accordionpro.js', dest: 'js/jquery.accordionpro.js' }
-      //     ]
-      //   },
+      sync: {
+        toBuild: {
+          files: [
+            {
+              src: ['*.php', '*.txt', 'README', 'css/**', 'js/**', 'inc/**'],
+              dest: '_build'
+            }
+          ],
+          failOnError: true,
+          pretend: false, // Don't do any IO. Before you run the task with `updateAndDelete` PLEASE MAKE SURE it doesn't remove too much.
+          verbose: false // Display log messages when copying files
+        },
 
-      //   build: {
-      //     options: {
-      //       separator: '\n\n',
-      //     },
-      //     src: [
-      //       'js/vendor/imagesloaded.js',
-      //       'js/vendor/transitiontest.js',
-      //       'js/vendor/animate.js',
-      //       'js/jquery.accordionpro.js'
-      //     ],
-      //     dest: 'js/jquery.accordionpro.js'
-      //   }
-      // },
+        toWP: {
+          files: [{
+            cwd: '_build',
+            src: ['**'],
+            dest: '/Volumes/files/webserver/websites/wordpress_4-1/wp-content/plugins/accordionpro_wp',
+          }],
+          failOnError: true,
+          pretend: false, // Don't do any IO. Before you run the task with `updateAndDelete` PLEASE MAKE SURE it doesn't remove too much.
+          verbose: false // Display log messages when copying files
+        }
+      },
 
-      // uglify: {
-      //   options: {
-      //     preserveComments: 'some'
-      //   },
-      //   build: {
-      //     files: {
-      //       'js/jquery.accordionpro.min.js' : 'js/jquery.accordionpro.js'
-      //     }
-      //   }
-      // },
-
-      // sass: {
-      //   build: {
-      //     options: {
-      //       banner: '<%= banner %>',
-      //       style: 'compressed'
-      //     },
-      //     files: {
-      //       'css/accordionpro.css' : 'css/scss/accordionpro.scss'
-      //     }
-      //   }
-      // },
-
-      // jasmine: {
-      //   src: 'js/jquery.accordionpro.js',
-      //   options: {
-      //     vendor: [
-      //       'bower_components/jquery/dist/jquery.js',
-      //       'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
-      //     ],
-      //     specs: 'test/**/*.js'
-      //   }
-      // },
-
-      // watch: {
-      //   options: {
-      //     livereload: true,
-      //     spawn: false
-      //   },
-
-      //   html: {
-      //     files: ['index.html']
-      //   },
-
-      //   scss: {
-      //     files: ['css/scss/*.scss'],
-      //     tasks: ['sass']
-      //   },
-
-      //   images: {
-      //     files: ['img-demo/*.*']
-      //   },
-
-      //   scripts: {
-      //     files: ['js/lib/*.js'],
-      //     tasks: ['default']
-      //   },
-
-      //   jasmine: {
-      //     files: ['test/**/*.js'],
-      //     tasks: ['test']
-      //   }
-      // }
+      watch: {
+        scripts: {
+          files: ['**/*.php'],
+          tasks: ['sync'],
+          options: {
+            spawn: false,
+          },
+        },
+      }
     });
 
     // These plugins provide necessary tasks
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-sync');
 
     // Default task
-    grunt.registerTask('default', ['sass', 'concat', 'uglify']);
-    grunt.registerTask('test', ['default', 'jasmine']);
-
+    grunt.registerTask('default', 'sync');
   };
-

@@ -29,6 +29,8 @@ class accordion_pro {
   ),
   $accContent = array(
     'content_title'             => array(),
+    'content_color'             => array(),
+    'content_icon'              => array(),
     'content_caption'           => array(),
     'content_caption_enabled'   => array(),
     'content'                   => array()
@@ -196,13 +198,13 @@ class accordion_pro {
     // Disable autosave
     wp_deregister_script('autosave');
 
-    // Register admin JS & CSS
+    // Register admin CSS & JS
     wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.css');
     wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.js', array('jquery'));
 
-    // Enqueue admin JS & CSS
-    wp_enqueue_script(array('jquery', 'accordion_pro_admin', 'editor', 'thickbox', 'media-upload'));
-    wp_enqueue_style('accordion_pro_admin', 'thickbox');
+    // Enqueue admin CSS & JS
+    wp_enqueue_style(array('accordion_pro_admin', 'thickbox', 'wp-color-picker'));
+    wp_enqueue_script(array('jquery', 'accordion_pro_admin', 'editor', 'media-upload', 'iris'));
   }
 
   /**
@@ -351,10 +353,9 @@ class accordion_pro {
     foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
 
     // The content title and content are arrays, so serialize them.
-    $this->update_post_meta($post['ID'], 'content_title', base64_encode(serialize($_POST['content_title'])));
-    $this->update_post_meta($post['ID'], 'content_caption', base64_encode(serialize($_POST['content_caption'])));
-    $this->update_post_meta($post['ID'], 'content_caption_enabled', base64_encode(serialize($_POST['content_caption_enabled'])));
-    $this->update_post_meta($post['ID'], 'content', base64_encode(serialize($_POST['content'])));
+    foreach($this->accContent as $key => $value) {
+      $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
+    }
 
     // Now make the cache
     $this->update_accordionCache($this->get_accordion_settings($clean['id'], true));
@@ -586,11 +587,11 @@ class accordion_pro {
       }
       unset($accordion['acc_content_temp']);
 
+      // unserialize acc content
       if (!empty($accordion['acc_content']['content'])) {
-        $accordion['acc_content']['content_title'] = unserialize(base64_decode($accordion['acc_content']['content_title']));
-        $accordion['acc_content']['content_caption'] = unserialize(base64_decode($accordion['acc_content']['content_caption']));
-        $accordion['acc_content']['content_caption_enabled'] = unserialize(base64_decode($accordion['acc_content']['content_caption_enabled']));
-        $accordion['acc_content']['content'] = unserialize(base64_decode($accordion['acc_content']['content']));
+        foreach($this->accContent as $key => $value) {
+          $accordion['acc_content'][$key] = unserialize(base64_decode($accordion['acc_content'][$key]));
+        }
       }
 
       // Set the jQuery settings

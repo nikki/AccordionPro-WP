@@ -17,12 +17,17 @@
 .ap-slide .ap-controls { padding: 0 10px }
 .ap-slide .ap-inner { padding: 10px }
 .ap-slide .ap-inner label { display: inline-block; width: 75px }
+
+.ap-slide .ap-inner .color-wrapper { display: inline-block }
+.ap-slide .ap-inner .color-wrapper .color-picker { width: 70px; border-radius: 3px; }
+.ap-slide .ap-inner .color-wrapper .iris-picker { position: absolute; z-index: 10 }
 .ap-slide .ap-inner .ap-slide-caption-enabled { margin-left: 10px; display: inline }
 .ap-slides #ap-add { float: left }
 .ap-slides .ap-slide-caption { margin-bottom: 4px }
 .ap-slides .ap-remove { margin-top: 10px }
 .ap-slides .ap-wait { margin: 4px 0 0 4px; display: none; height: 16px; width: 16px; background: url('wpspin_light.gif') no-repeat }
 .ap-slides .ap-save { float: right; display: inline-block }
+/*.mce-panel { display: none }*/
 .ap-slide iframe { height: 100% !important }
 
 .ap-options, .ap-newsletter { width: 285px; margin: 0 auto }

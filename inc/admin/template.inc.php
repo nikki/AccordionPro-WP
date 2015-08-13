@@ -7,6 +7,11 @@
 		<div class="ap-slide-title">
 			<label for="ap-slide-<?php echo $key + 1; ?>">Slide Title: </label>
 			<input name='content_title[]' id="ap-slide-<?php echo $key + 1; ?>" type="text" value="" />
+
+      <div class="color-wrapper">
+        <input type="text" name="color" class="color-picker" value="" />
+      </div>
+
 		</div>
 		<div class="ap-slide-caption">
 			<label for="ap-slide-caption-<?php echo $key + 1; ?>">Caption: </label>

@@ -62,6 +62,9 @@ jQuery(function($) {
               // init editor
               _this.initEditor(res, len);
 
+              // init colour picker
+              _this.initColourPicker();
+
               // reset clicked flag
               clicked = false;
             }
@@ -166,6 +169,32 @@ jQuery(function($) {
       });
     },
 
+    initColourPicker : function() {
+      $picker = $('.color-picker');
+      $picker
+        .iris({
+          palettes: true,
+          change : function(e, ui) {
+            $(this).css({
+              background : ui.color.toString()
+            });
+          }
+        })
+        .on('click', function(e) {
+          $(this).iris('show');
+        })
+        .next()
+        .on('mouseleave', function(e) {
+          // console.log($(this).prev());
+          // $(this).prev().iris('hide');
+        })
+        .parent()
+        .on('click', '.iris-palette:eq(0)', function(e) {
+          // clear colour value
+          $(e.delegateTarget).children().first().val('').css('background', 'none');
+        });
+    },
+
     removeAccordion : function() {
       $('.ap-del-acc').click(function() {
         if (confirm($(this).attr('data-confirm'))) {
@@ -229,6 +258,7 @@ jQuery(function($) {
       this.switchOrientation();
       this.switchEditor();
       this.addMedia();
+      this.initColourPicker();
       this.removeAccordion();
       this.showTooltip();
       this.subscribeToNewsletter();

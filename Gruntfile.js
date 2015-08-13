@@ -55,10 +55,11 @@ module.exports = function (grunt) {
 
       watch: {
         scripts: {
-          files: ['**/*.php'],
+          files: ['css/*.css', 'js/*.js', '**/*.php'],
           tasks: ['sync'],
           options: {
             spawn: false,
+            livereload: true
           },
         },
       }

@@ -29,7 +29,7 @@ if (!class_exists('WP')) {
 
 			$settings = array(
 				'textarea_name' => 'content[]',
-				'textarea_rows' => 8
+				'editor_height' => 172
 			);
 
 			if (!empty($accordion['acc_content']['content']) && is_array($accordion['acc_content']['content'])) {
@@ -44,7 +44,12 @@ if (!class_exists('WP')) {
 								<div class="ap-slide-title">
 									<label for="ap-slide-title-<?php echo $key + 1; ?>">Slide Title: </label>
 									<input name="content_title[]" id="ap-slide-title-<?php echo $key + 1; ?>" type="text" value="<?php echo stripslashes($accordion['acc_content']['content_title'][$key]); ?>" />
-								</div>
+
+                <div class="color-wrapper">
+                  <input name="content_color[]" type="text" class="color-picker" value="<?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" style="background: <?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" />
+                </div>
+
+                </div>
 								<div class="ap-slide-caption">
 									<label for="ap-slide-caption-<?php echo $key + 1; ?>">Caption: </label>
 									<input name="content_caption[]" id="ap-slide-caption-<?php echo $key + 1; ?>" class="ap-slide-caption-input <?php if (!$accordion['acc_content']['content_caption_enabled'][$key]) { echo 'disabled'; } ?>" type="text" value="<?php echo stripslashes($accordion['acc_content']['content_caption'][$key]); ?>" />
@@ -73,6 +78,11 @@ if (!class_exists('WP')) {
 							<div class="ap-slide-title">
 								<label for="ap-slide-title-1">Slide Title: </label>
 								<input name='content_title[]' id="ap-slide-title-1" type="text" value="" />
+
+                <div class="color-wrapper">
+                  <input name="content_color[]" type="text" class="color-picker" value="" />
+                </div>
+
 							</div>
 							<div class="ap-slide-caption">
 								<label for="ap-slide-caption-1">Caption: </label>
@@ -192,17 +202,17 @@ if (!class_exists('WP')) {
           'value' => 'Arial'
         ),
         'tab.icon' => array(
-          'desc' => 'Set tab icon, choose from <b>none</b>, <b>number</b>, <b>chevron</b>, <b>disc</b>, <b>square</b>, and <b>custom</b>',
+          'desc' => 'Set tab icon, choose from <b>number</b>, <b>chevron</b>, <b>disc</b>, <b>square</b>, <b>custom</b> and <b>none</b>',
           'value' => array('number', 'chevron', 'disc', 'square', 'custom', 'none')
         ),
-        'tab.customIcons' => array(
-          'desc' => 'Set a custom image for each icon',
-          'value' => 'Not available in demo.'
-        ),
-        'tab.customColours' => array(
-          'desc' => 'Set a custom colour for each tab',
-          'value' => 'Not available in demo.'
-        ),
+        // 'tab.customIcons' => array(
+        //   'desc' => 'Set a custom image for each icon',
+        //   'value' => 'Not available in demo.'
+        // ),
+        // 'tab.customColours' => array(
+        //   'desc' => 'Set a custom colour for each tab',
+        //   'value' => 'Not available in demo.'
+        // ),
         'tab.selected' => array(
           'desc' => 'Display slide number (n) on page load',
           'value' => 1

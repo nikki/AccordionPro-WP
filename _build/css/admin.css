@@ -18,7 +18,7 @@
 .ap-slide .ap-inner { padding: 10px }
 .ap-slide .ap-inner label { display: inline-block; width: 75px }
 
-.ap-slide .ap-inner .color-wrapper { display: inline-block }
+.ap-slide .ap-inner .color-wrapper { display: inline-block; margin-left: 8px }
 .ap-slide .ap-inner .color-wrapper .color-picker { width: 70px; border-radius: 3px; }
 .ap-slide .ap-inner .color-wrapper .iris-picker { position: absolute; z-index: 10 }
 .ap-slide .ap-inner .ap-slide-caption-enabled { margin-left: 10px; display: inline }

@@ -216,13 +216,13 @@ class accordion_pro {
     add_menu_page(__('Accordion Pro', 'accordion_pro'), __('Accordion Pro', 'accordion_pro'), 'manage_options', 'accordion_pro', array($this, 'admin_settings'));
 
     // Manage page sub menu
-    add_submenu_page( 'accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Manage Accordions', 'accordion_pro'), __('Manage Accordions', 'accordion_pro'), 'manage_options', 'accordion_pro', array($this, 'admin_settings'));
+    add_submenu_page('accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Manage Accordions', 'accordion_pro'), __('Manage Accordions', 'accordion_pro'), 'manage_options', 'accordion_pro', array($this, 'admin_settings'));
 
     // Create page sub menu
-    add_submenu_page( 'accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Create Accordions', 'accordion_pro'), __('Create Accordions', 'accordion_pro'), 'manage_options', 'accordion_pro_add', array($this, 'admin_settings'));
+    add_submenu_page('accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Create Accordions', 'accordion_pro'), __('Create Accordions', 'accordion_pro'), 'manage_options', 'accordion_pro_add', array($this, 'admin_settings'));
 
     // Settings page
-    add_submenu_page( 'accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Settings', 'accordion_pro'), __('Settings', 'accordion_pro'), 'manage_options', 'accordion_pro_settings', array($this, 'admin_settings'));
+    add_submenu_page('accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Settings', 'accordion_pro'), __('Settings', 'accordion_pro'), 'manage_options', 'accordion_pro_settings', array($this, 'admin_settings'));
   }
 
   /**
@@ -435,16 +435,25 @@ class accordion_pro {
     foreach ($this->jQueryOptions as $key => $default) {
       $value = $accordion['jQuerySettings'][$key];
 
-      // !!! customColours and icons need something working out in the tab panel
-      if ($key == 'tab.customColours' || $key == 'tab.customIcons') continue;
-
       // don't create js props for defaults
       if ($value !== $default) {
+
         // nested array
         if (strrpos($key, '.')) {
           $newKey = explode('.', $key);
-          if (!$options[$newKey[0]]) $options[explode('.', $key)[0]] = array();
-          array_push($options[$newKey[0]], $this->create_js_kvp($newKey[1], $value, $default));
+          if (!$options[$newKey[0]]) $options[$newKey[0]] = array();
+
+          // custom icons for each tab
+          if ($newKey[1] == 'customIcons') {
+
+          // !!!
+
+          } else if ($newKey[1] == 'customColours') { // custom colours for each tab
+            $customColours = array_map(array($this, 'add_quotes'), $accordion['acc_content']['content_color']);
+            array_push($options[$newKey[0]], $newKey[1] . ': [' . implode(', ', $customColours) . ']');
+          } else {
+            array_push($options[$newKey[0]], $this->create_js_kvp($newKey[1], $value, $default));
+          }
         } else { // single kv pair
           array_push($options, $this->create_js_kvp($key, $value, $default));
         }
@@ -754,4 +763,13 @@ class accordion_pro {
       return $key . ':' . $value;
     }
   }
+
+  /**
+   * Wrap string in single quotes
+   */
+
+  public function add_quotes($str) {
+    return sprintf("'%s'", $str);
+  }
+
 }

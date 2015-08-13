@@ -205,14 +205,14 @@ if (!class_exists('WP')) {
           'desc' => 'Set tab icon, choose from <b>number</b>, <b>chevron</b>, <b>disc</b>, <b>square</b>, <b>custom</b> and <b>none</b>',
           'value' => array('number', 'chevron', 'disc', 'square', 'custom', 'none')
         ),
-        // 'tab.customIcons' => array(
-        //   'desc' => 'Set a custom image for each icon',
-        //   'value' => 'Not available in demo.'
-        // ),
-        // 'tab.customColours' => array(
-        //   'desc' => 'Set a custom colour for each tab',
-        //   'value' => 'Not available in demo.'
-        // ),
+        'tab.customIcons' => array(
+          'desc' => 'Set a custom image for each icon',
+          'value' => 'Not available in demo.'
+        ),
+        'tab.customColours' => array(
+          'desc' => 'Set a custom colour for each tab',
+          'value' => 'Not available in demo.'
+        ),
         'tab.selected' => array(
           'desc' => 'Display slide number (n) on page load',
           'value' => 1

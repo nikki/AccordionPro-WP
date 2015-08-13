@@ -173,7 +173,7 @@ jQuery(function($) {
       $picker = $('.color-picker');
       $picker
         .iris({
-          palettes: true,
+          palettes: ['#ffffff', '#c25252', '#ca9859', '#96ba5f', '#59abb7', '#bb6098'],
           change : function(e, ui) {
             $(this).css({
               background : ui.color.toString()
@@ -185,8 +185,7 @@ jQuery(function($) {
         })
         .next()
         .on('mouseleave', function(e) {
-          // console.log($(this).prev());
-          // $(this).prev().iris('hide');
+          $(this).prev().iris('hide');
         })
         .parent()
         .on('click', '.iris-palette:eq(0)', function(e) {

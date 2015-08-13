@@ -538,7 +538,6 @@ class accordion_pro {
     return $ids;
   }
 
-
   /**
    * Call accordion based on ID
    */
@@ -718,11 +717,12 @@ class accordion_pro {
    */
 
   /**
-   * Sanitize a string (alphanumeric plus dashes and underscore)
+   * Sanitize a string
    */
 
   public function sanitize($val) {
-    return preg_replace('/[^a-zA-Z0-9-_%]/', '', $val);
+    $val = preg_replace ('/\s+/', ' ', $val); // multispaces
+    return preg_replace('/[^a-zA-Z0-9-_ %]/', '', $val); // keep alphanumeric, dash, underscore, single space
   }
 
   /**
@@ -747,9 +747,7 @@ class accordion_pro {
    */
 
   public function create_js_kvp($key, $value, $default) {
-    if (is_bool($default) || is_numeric($default)) {
-      return $key . ': ' . $this->sanitize($value);
-    } else if (strpos($default, 'function') === false) { // string, but not function
+    if (is_string($default) && strpos($default, 'function') === false) {
       return $key . ': \'' . addslashes($value) . '\'';
     } else {
       return $key . ':' . $value;

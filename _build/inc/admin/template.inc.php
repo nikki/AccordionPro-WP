@@ -5,11 +5,25 @@
 	</h3>
 	<div class="ap-inner tmce-active">
 		<div class="ap-slide-title">
-			<label for="ap-slide-<?php echo $key + 1; ?>">Slide Title: </label>
-			<input name='content_title[]' id="ap-slide-<?php echo $key + 1; ?>" type="text" value="" />
+
+      <div class="title-wrapper">
+        <label for="ap-slide-<?php echo $key + 1; ?>">Slide Title: </label>
+        <input name='content_title[]' id="ap-slide-<?php echo $key + 1; ?>" type="text" value="" />
+      </div>
 
       <div class="color-wrapper">
-        <input type="text" name="color" class="color-picker" value="" />
+        <button class="button">
+          <span class="dashicons dashicons-admin-appearance" style=""></span>
+        </button>
+        <input name="content_color[]" type="text" class="color-picker" value="" style="" />
+      </div>
+
+      <div class="icon-wrapper">
+        <button class="button">
+          <span class="dashicons dashicons-format-image"></span>
+        </button>
+        <input name="content_icon[]" type="hidden" value="" />
+        <div class="icon-preview"></div>
       </div>
 
 		</div>

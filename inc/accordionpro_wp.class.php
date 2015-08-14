@@ -390,7 +390,7 @@ class accordion_pro {
     $allowedextratags = array_merge($extratags, $allowedposttags);
 
     // Generate the 'post_content', which is a cached version of the html
-    $accordion['post_content'] = '<div id="accordionPro'.$accordion['ID'].'" class="accordionPro"><ol>';
+    $accordion['post_content'] = '<div id="accordionPro'.$accordion['ID'].'" class="accordionPro" style="visibility:hidden"><ol>';
 
     // esc html on title
     // allow tags on caption
@@ -444,13 +444,10 @@ class accordion_pro {
           if (!$options[$newKey[0]]) $options[$newKey[0]] = array();
 
           // custom icons for each tab
-          if ($newKey[1] == 'customIcons') {
-
-          // !!!
-
-          } else if ($newKey[1] == 'customColours') { // custom colours for each tab
-            $customColours = array_map(array($this, 'add_quotes'), $accordion['acc_content']['content_color']);
-            array_push($options[$newKey[0]], $newKey[1] . ': [' . implode(', ', $customColours) . ']');
+          if ($newKey[1] == 'customIcons' || $newKey[1] == 'customColours') {
+            $k = $newKey[1] == 'customIcons' ? 'content_icon' : 'content_color';
+            $a = array_map(array($this, 'wrap_quotes'), $accordion['acc_content'][$k]);
+            array_push($options[$newKey[0]], $newKey[1] . ': [' . implode(', ', $a) . ']');
           } else {
             array_push($options[$newKey[0]], $this->create_js_kvp($newKey[1], $value, $default));
           }
@@ -768,7 +765,7 @@ class accordion_pro {
    * Wrap string in single quotes
    */
 
-  public function add_quotes($str) {
+  public function wrap_quotes($str) {
     return sprintf("'%s'", $str);
   }
 

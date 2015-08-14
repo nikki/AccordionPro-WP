@@ -42,12 +42,26 @@ if (!class_exists('WP')) {
 							</h3>
 							<div class="ap-inner">
 								<div class="ap-slide-title">
-									<label for="ap-slide-title-<?php echo $key + 1; ?>">Slide Title: </label>
-									<input name="content_title[]" id="ap-slide-title-<?php echo $key + 1; ?>" type="text" value="<?php echo stripslashes($accordion['acc_content']['content_title'][$key]); ?>" />
 
-                <div class="color-wrapper">
-                  <input name="content_color[]" type="text" class="color-picker" value="<?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" style="background: <?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" />
-                </div>
+                  <div class="title-wrapper">
+                    <label for="ap-slide-title-<?php echo $key + 1; ?>">Slide Title: </label>
+                    <input name="content_title[]" id="ap-slide-title-<?php echo $key + 1; ?>" type="text" value="<?php echo stripslashes($accordion['acc_content']['content_title'][$key]); ?>" />
+                  </div>
+
+                  <div class="color-wrapper">
+                    <button class="button">
+                      <span class="dashicons dashicons-admin-appearance" style="background-color: <?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>"></span>
+                    </button>
+                    <input name="content_color[]" type="text" class="color-picker" value="<?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" style="background-color: <?php echo stripslashes($accordion['acc_content']['content_color'][$key]); ?>" />
+                  </div>
+
+                  <div class="icon-wrapper">
+                    <button class="button">
+                      <span class="dashicons dashicons-format-image"></span>
+                    </button>
+                    <input name="content_icon[]" type="hidden" value="<?php echo stripslashes($accordion['acc_content']['content_icon'][$key]); ?>" />
+                    <div class="icon-preview <?php if (strrpos($accordion['acc_content']['content_icon'][$key], '.')) echo "active"; ?>" style="background-image: url('<?php echo stripslashes($accordion['acc_content']['content_icon'][$key]); ?>')"></div>
+                  </div>
 
                 </div>
 								<div class="ap-slide-caption">
@@ -76,11 +90,25 @@ if (!class_exists('WP')) {
 						</h3>
 						<div class="ap-inner">
 							<div class="ap-slide-title">
-								<label for="ap-slide-title-1">Slide Title: </label>
-								<input name='content_title[]' id="ap-slide-title-1" type="text" value="" />
+
+                <div class="title-wrapper">
+                  <label for="ap-slide-title-1">Slide Title: </label>
+                  <input name='content_title[]' id="ap-slide-title-1" type="text" value="" />
+                </div>
 
                 <div class="color-wrapper">
-                  <input name="content_color[]" type="text" class="color-picker" value="" />
+                  <button class="button">
+                    <span class="dashicons dashicons-admin-appearance" style=""></span>
+                  </button>
+                  <input name="content_color[]" type="text" class="color-picker" value="" style="" />
+                </div>
+
+                <div class="icon-wrapper">
+                  <button class="button">
+                    <span class="dashicons dashicons-format-image"></span>
+                  </button>
+                  <input name="content_icon[]" type="hidden" value="" />
+                  <div class="icon-preview"></div>
                 </div>
 
 							</div>
@@ -207,11 +235,11 @@ if (!class_exists('WP')) {
         ),
         'tab.customIcons' => array(
           'desc' => 'Set a custom image for each icon',
-          'value' => 'Not available in demo.'
+          'value' => NULL
         ),
         'tab.customColours' => array(
           'desc' => 'Set a custom colour for each tab',
-          'value' => 'Not available in demo.'
+          'value' => NULL
         ),
         'tab.selected' => array(
           'desc' => 'Display slide number (n) on page load',
@@ -286,49 +314,57 @@ if (!class_exists('WP')) {
         echo "<div id='$title' class='postbox'>";
         echo "<h3>$section</h3>";
         foreach ($def as $key => $value) {
-          $split = strrpos($key, '.') ? explode('.', $key)[1] : $key;
-            echo "<div class='inside'>";
-            echo "<label class='control-label span2' for='$key'><span>?</span>" . $split . "</label>";
-            foreach ($value as $k => $v) {
-              if ($k == 'value') {
-                $t = gettype($v);
+          if (is_null($value['value'])) { // null types don't need a panel entry
+            echo "<input type='hidden' id='$key' name='$key' value='$args[$key]' />";
+            continue;
+          }
 
-                switch ($t) {
-                  case 'boolean':
-                    echo "<select id='$key' name='$key'>";
-                    if ($args[$key]) {
+          $split = strrpos($key, '.') ? explode('.', $key)[1] : $key;
+          echo "<div class='inside'>";
+          echo "<label class='control-label span2' for='$key'><span>?</span>" . $split . "</label>";
+
+          foreach ($value as $k => $v) {
+            if ($k == 'value') {
+              $t = gettype($v);
+
+              switch ($t) {
+                case 'boolean':
+                  echo "<select id='$key' name='$key'>";
+                  if ($args[$key]) {
 echo <<<EOT
-                        <option name="false" value="false">false</option>
-                        <option name="true" value="true" selected="selected">true</option>
+                      <option name="false" value="false">false</option>
+                      <option name="true" value="true" selected="selected">true</option>
 EOT;
-                    } else {
+                  } else {
 echo <<<EOT
-                        <option name="false" value="false" selected="selected">false</option>
-                        <option name="true" value="true">true</option>
+                      <option name="false" value="false" selected="selected">false</option>
+                      <option name="true" value="true">true</option>
 EOT;
-                    }
-                    echo "</select>";
-                    break;
-                  case 'integer':
-                  case 'string':
-                    echo "<input type='text' id='$key' name='$key' value='$args[$key]' />";
-                    break;
-                  case 'array':
-                    echo "<select id='$key' name='$key'>";
-                    foreach ($v as $a => $b) {
-                      // if $_GET opt val...
-                      $selected = $b === $args[$key] ? 'selected=selected' : '';
-                      echo "<option name='$b' value='$b' autocomplete='off' $selected>$b</option>";
-                    }
-                    echo "</select>";
-                  default:
-                    break;
-                }
-        				echo "</div>";
-              } else {
-              	echo "<p class='tooltip'>$v</p>";
+                  }
+                  echo "</select>";
+                  break;
+                case 'integer':
+                  echo "<input type='number' min='0' step='1' id='$key' name='$key' value='$args[$key]' />";
+                  break;
+                case 'string':
+                  echo "<input type='text' id='$key' name='$key' value='$args[$key]' />";
+                  break;
+                case 'array':
+                  echo "<select id='$key' name='$key'>";
+                  foreach ($v as $a => $b) {
+                    // if $_GET opt val...
+                    $selected = $b === $args[$key] ? 'selected=selected' : '';
+                    echo "<option name='$b' value='$b' autocomplete='off' $selected>$b</option>";
+                  }
+                  echo "</select>";
+                default:
+                  break;
               }
+      				echo "</div>";
+            } else {
+            	echo "<p class='tooltip'>$v</p>";
             }
+          }
         }
         echo "</div>";
     }

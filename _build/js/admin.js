@@ -65,6 +65,9 @@ jQuery(function($) {
               // init colour picker
               _this.initColourPicker();
 
+              // init icon picker
+              _this.initIconPicker();
+
               // reset clicked flag
               clicked = false;
             }
@@ -170,19 +173,27 @@ jQuery(function($) {
     },
 
     initColourPicker : function() {
-      $picker = $('.color-picker');
+      var $picker = $('.color-picker');
+
       $picker
         .iris({
           palettes: ['#ffffff', '#c25252', '#ca9859', '#96ba5f', '#59abb7', '#bb6098'],
           change : function(e, ui) {
-            $(this).css({
-              background : ui.color.toString()
+            var $this = $(this);
+            $this.add($this.prev().children()).css({
+              'background-color' : ui.color.toString()
             });
           }
         })
         .on('click', function(e) {
           $(this).iris('show');
         })
+        .prev()
+        .on('click', function(e) {
+          $(this).next().iris('show');
+          e.preventDefault();
+        })
+        .end()
         .next()
         .on('mouseleave', function(e) {
           $(this).prev().iris('hide');
@@ -190,7 +201,46 @@ jQuery(function($) {
         .parent()
         .on('click', '.iris-palette:eq(0)', function(e) {
           // clear colour value
-          $(e.delegateTarget).children().first().val('').css('background', 'none');
+          $(e.delegateTarget).children('input').val('').css('background', 'none');
+        })
+        .find('.iris-palette:eq(0)').addClass('dashicons dashicons-no');
+    },
+
+    initIconPicker : function() {
+      var $picker = $('.icon-wrapper button'),
+          $preview = $('.icon-preview');
+
+      $picker.on('click', function(e) {
+        var $this = $(this);
+
+        var uploader = wp.media({
+          title: 'Select image',
+          multiple: false
+        })
+        .on('select', function() {
+          var url = uploader.state().get('selection').first().toJSON().url;
+
+          // set icon url, create a preview
+          $this
+            .next()
+            .val(url)
+            .next()
+            .css('background-image', 'url(\'' + url + '\')')
+            .addClass('active');
+        })
+        .open();
+
+        e.preventDefault();
+      });
+
+      $preview
+        .on('click', function(e) {
+          // clear icon url, clear preview
+          $(this)
+            .css('background-image', '')
+            .removeClass('active')
+            .prev()
+            .val('');
         });
     },
 
@@ -241,7 +291,7 @@ jQuery(function($) {
                   });
                 $.post(ajaxurl, { action: 'set_newsletter_subscribed' });
               } else {
-                showMessage('<b style="color:red">Error: </b>' + data.Message);
+                showMessage('<b style="color:darkred">Error: </b>' + data.Message);
               }
           });
           e.preventDefault();
@@ -258,6 +308,7 @@ jQuery(function($) {
       this.switchEditor();
       this.addMedia();
       this.initColourPicker();
+      this.initIconPicker();
       this.removeAccordion();
       this.showTooltip();
       this.subscribeToNewsletter();

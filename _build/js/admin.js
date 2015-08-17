@@ -244,6 +244,29 @@ jQuery(function($) {
         });
     },
 
+    initClipboardCopy : function() {
+      var $btn = $('.ap-overview .ap-clipboard');
+
+      // copy to clipboard supported
+      if ($btn.length) {
+        $btn.on('click', function(e) {
+          $(this).prev().select(); // select text
+
+          try {
+            var copy = document.execCommand('copy');
+            alert(copy ? 'Copied text to clipboard.' : 'Copy to clipboard not currently supported in this browser. Sorry.');
+            if (!copy) $btn.hide();
+          } catch(err) {
+            alert('Copy to clipboard not currently supported in this browser. Sorry.');
+            $btn.hide();
+          }
+
+          // deselect text
+          document.getSelection().removeAllRanges();
+        });
+      }
+    },
+
     removeAccordion : function() {
       $('.ap-del-acc').click(function() {
         if (confirm($(this).attr('data-confirm'))) {
@@ -311,6 +334,7 @@ jQuery(function($) {
       this.initIconPicker();
       this.removeAccordion();
       this.showTooltip();
+      this.initClipboardCopy();
       this.subscribeToNewsletter();
     }
   };

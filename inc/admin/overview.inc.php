@@ -40,10 +40,11 @@ if (!class_exists('WP')) {
 				<span class="sorting-indicator"></span>
 			</a>
 		</th>
-		<th scope="col" class="manage-column sortable desc"><?php _e('Shortcode', 'accordion_pro'); ?></th>
-		<th scope="col" class="manage-column sortable desc"><?php _e('PHP Code', 'accordion_pro'); ?></th>
-		<th scope="col" class="manage-column column-posts"><?php _e('Edit', 'accordion_pro'); ?></th>
-		<th scope="col" class="manage-column column-posts"><?php _e('Delete', 'accordion_pro'); ?></th>
+		<th scope="col" class=""><?php _e('Shortcode', 'accordion_pro'); ?></th>
+		<th scope="col" class=""><?php _e('PHP Code', 'accordion_pro'); ?></th>
+		<th class="icon" scope="col" class="manage-column column-posts"><?php _e('Edit', 'accordion_pro'); ?></th>
+        <th class="icon" scope="col" class="manage-column column-posts"><?php _e('Clone', 'accordion_pro'); ?></th>
+		<th class="icon" scope="col" class="manage-column column-posts"><?php _e('Delete', 'accordion_pro'); ?></th>
 	</tr>
 	</thead>
 
@@ -71,10 +72,11 @@ if (!class_exists('WP')) {
     			</td>
     			<td><?php echo $post->post_date; ?></td>
 
-    			<td><input type="text" value="[accordion_pro id='<?php echo $post->ID; ?>']" readonly /></td>
-    			<td><input type="text" value="&lt;?php echo do_shortcode(&quot;[accordion_pro id='<?php echo $post->ID; ?>']&quot;); ?&gt;" readonly /></td>
-    			<td><a href="admin.php?page=accordion_pro&mode=edit&id=<?php echo $post->ID; ?>"><?php _e('Edit', 'accordion_pro'); ?></a></td>
-                <td><a href="<?php echo wp_nonce_url($url, 'delete', 'accordion_pro'); ?>" class="ap-del-acc" data-confirm="<?php _e('Are you sure you want to delete ', 'accordion_pro'); echo $post->post_title; ?>?"><?php _e('Delete', 'accordion_pro'); ?></a></td>
+    			<td><input type="text" value="[accordion_pro id='<?php echo $post->ID; ?>']" readonly /><a href="#" class="ap-clipboard"><span class="dashicons dashicons-clipboard"></span></a></td>
+    			<td><input type="text" value="&lt;?php echo do_shortcode(&quot;[accordion_pro id='<?php echo $post->ID; ?>']&quot;); ?&gt;" readonly /><a href="#" class="ap-clipboard"><span class="dashicons dashicons-clipboard"></span></a></td>
+    			<td class="icon"><a href="admin.php?page=accordion_pro&mode=edit&id=<?php echo $post->ID; ?>"><span class="dashicons dashicons-edit"></span></a></td>
+                <td class="icon"><a href="#"><span class="dashicons dashicons-admin-page"></span></a></td>
+                <td class="icon"><a href="<?php echo wp_nonce_url($url, 'delete', 'accordion_pro'); ?>" class="ap-del-acc" data-confirm="<?php _e('Are you sure you want to delete ', 'accordion_pro'); echo $post->post_title; ?>?"><span class="dashicons dashicons-trash"></span></a></td>
     		</tr>
     <?php
         }

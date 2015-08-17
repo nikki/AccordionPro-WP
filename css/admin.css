@@ -1,10 +1,20 @@
 /**
- * Page Layout
+ * Management Page Layout
  */
 
 .wrap { min-width: 800px }
 .ap-overview th { background: #E1E1E1; border-bottom: 1px solid #0074a2 }
-.ap-overview th a { box-shadow: none }
+.ap-overview th a { box-shadow: none; outline: none }
+.ap-overview .icon { text-align: center; width: 45px  }
+.ap-overview a { box-shadow: none }
+.ap-overview a span { line-height: 27px }
+.ap-overview .dashicons-clipboard { transform: rotate(-45deg) }
+
+
+/**
+ * Create/Edit Page Layout
+ */
+
 .ap-left { float: left; clear: left; width: 100%; margin-right: -325px }
 .ap-right { float: right; clear: right; width: 300px }
 

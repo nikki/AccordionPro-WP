@@ -319,7 +319,8 @@ if (!class_exists('WP')) {
             continue;
           }
 
-          $split = strrpos($key, '.') ? explode('.', $key)[1] : $key;
+          $exploded = explode('.', $key); // array deferencing in php 5.4+ only :/
+          $split = (is_array($exploded) && count($exploded) > 1) ? $exploded[1] : $key;
           echo "<div class='inside'>";
           echo "<label class='control-label span2' for='$key'><span>?</span>" . $split . "</label>";
 

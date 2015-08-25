@@ -284,7 +284,7 @@ class accordion_pro {
         include('admin/overview.inc.php');
       }
     } else if ($clean['page'] === 'accordion_pro_settings') {
-      if ($clean['mode'] === 'delete_data') {
+      if (isset($clean['mode']) && $clean['mode'] === 'delete_data') {
         // delete data
         include('admin/delete_data.inc.php');
       } else {
@@ -719,12 +719,15 @@ class accordion_pro {
 
         // write css to file (can't access WPDB from style php)
         if ($key === 'additional_css') {
-          file_put_contents(WP_PLUGIN_DIR . '/accordionpro_wp/css/additional.css', $setting);
+          if (file_put_contents(WP_PLUGIN_DIR . '/accordionpro_wp/css/additional.css', $setting) === false) {
+            $this->notices[] = __('Error.', 'accordion_pro');
+            return;
+          }
         }
       }
     }
 
-    // Throw notice
+    // show notice
     $this->notices[] = __('Settings Updated.', 'accordion_pro');
   }
 
@@ -755,16 +758,16 @@ class accordion_pro {
   }
 
   /**
-   * Display notices if set
+   * Display notice
    */
 
   public function display_notices() {
     if (is_array($this->notices)) {
-      echo '<div id="setting-error-settings_updated" class="updated settings-error">';
       foreach ($this->notices as $notice) {
-        echo '<p>'.$notice.'</p>';
+        echo '<div class="' . ($notice === 'Error.' ? 'error' : 'updated') . '">';
+        echo '<p>' . $notice . '</p>';
+        echo '</div>';
       }
-      echo '</div>';
     }
   }
 

@@ -58,7 +58,7 @@ module.exports = function (grunt) {
           files: ['css/*.css', 'js/*.js', '**/*.php'],
           tasks: ['sync'],
           options: {
-            spawn: false,
+            spawn: true,
             livereload: true
           },
         },

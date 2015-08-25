@@ -263,12 +263,26 @@ jQuery(function($) {
 
           // deselect text
           document.getSelection().removeAllRanges();
+          e.preventDefault();
         });
       }
     },
 
+    cloneAccordion : function() {
+      var $clone = $('.ap-clone-acc');
+      if (!$clone.length) return;
+
+      $clone.on('click', function(e) {
+        // alert('clone');
+        // e.preventDefault();
+      });
+    },
+
     removeAccordion : function() {
-      $('.ap-del-acc').click(function() {
+      var $delete = $('.ap-del-acc');
+      if (!$delete.length) return;
+
+      $delete.on('click', function(e) {
         if (confirm($(this).attr('data-confirm'))) {
           return true;
         }
@@ -332,8 +346,9 @@ jQuery(function($) {
       this.addMedia();
       this.initColourPicker();
       this.initIconPicker();
-      this.removeAccordion();
       this.showTooltip();
+      this.cloneAccordion();
+      this.removeAccordion();
       this.initClipboardCopy();
       this.subscribeToNewsletter();
     }

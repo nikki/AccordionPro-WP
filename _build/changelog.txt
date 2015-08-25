@@ -1,5 +1,8 @@
 CHANGELOG
 
+v3.0
+
+
 v2.1 - 21/05/2015
   - fixed bug introduced in WP4 (tabbing between visual and text editors)
   - implemented TinyMCE Advanced support

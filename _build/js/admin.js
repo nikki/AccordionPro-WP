@@ -254,11 +254,9 @@ jQuery(function($) {
 
           try {
             var copy = document.execCommand('copy');
-            alert(copy ? 'Copied text to clipboard.' : 'Copy to clipboard not currently supported in this browser. Sorry.');
-            if (!copy) $btn.hide();
+            alert(copy ? 'Copied text to clipboard.' : 'Copy to clipboard not currently supported in this browser.');
           } catch(err) {
-            alert('Copy to clipboard not currently supported in this browser. Sorry.');
-            $btn.hide();
+            alert('Copy to clipboard not currently supported in this browser.');
           }
 
           // deselect text
@@ -266,16 +264,6 @@ jQuery(function($) {
           e.preventDefault();
         });
       }
-    },
-
-    cloneAccordion : function() {
-      var $clone = $('.ap-clone-acc');
-      if (!$clone.length) return;
-
-      $clone.on('click', function(e) {
-        // alert('clone');
-        // e.preventDefault();
-      });
     },
 
     removeAccordion : function() {
@@ -347,7 +335,6 @@ jQuery(function($) {
       this.initColourPicker();
       this.initIconPicker();
       this.showTooltip();
-      this.cloneAccordion();
       this.removeAccordion();
       this.initClipboardCopy();
       this.subscribeToNewsletter();

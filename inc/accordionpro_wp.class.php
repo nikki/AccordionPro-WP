@@ -77,6 +77,7 @@ class accordion_pro {
   ),
   $css_ids = array();
 
+
   /**
    * INIT PLUGIN
    */
@@ -182,6 +183,7 @@ class accordion_pro {
     }
   }
 
+
   /**
    * ADMIN SETUP
    */
@@ -225,6 +227,7 @@ class accordion_pro {
     add_submenu_page('accordion_pro', __('Accordion Pro', 'accordion_pro').' - '.__('Settings', 'accordion_pro'), __('Settings', 'accordion_pro'), 'manage_options', 'accordion_pro_settings', array($this, 'admin_settings'));
   }
 
+
   /**
    * ADMIN PAGES
    */
@@ -267,9 +270,14 @@ class accordion_pro {
         // inc slide manager page
         include('admin/manage.inc.php');
       } else {
-        // If someone is adding/updating an accordion
+        // delete accordion
         if (isset($_GET['delete_accordion']) && check_admin_referer('delete', 'accordion_pro')) {
           $this->delete_accordion($clean['id']);
+        }
+
+        // clone accordion
+        if (isset($_GET['clone_accordion']) && check_admin_referer('clone', 'accordion_pro')) {
+          $this->clone_accordion($clean['id']);
         }
 
         // inc overview page
@@ -293,6 +301,7 @@ class accordion_pro {
     echo '</div>';
   }
 
+
   /**
    * CREATE & MANAGE PAGES
    */
@@ -313,10 +322,11 @@ class accordion_pro {
    * Updates post data, rebuilds cache
    */
 
-  public function update_accordion() {
-      $clean = array();
-      if (isset($_GET['id'])) $clean['id'] = $this->sanitize($_GET['id']);
-      if (isset($_POST['accordionName'])) $clean['title'] = $this->sanitize($_POST['accordionName']);
+  public function update_accordion($clone = NULL) {
+    $clean = array();
+    if (isset($_GET['id']) && !$clone) $clean['id'] = $this->sanitize($_GET['id']);
+    if (isset($_POST['accordionName'])) $clean['title'] = $this->sanitize($_POST['accordionName']);
+    if (isset($clone)) $clean['title'] = $this->sanitize($clone);
 
     // Build the post data
     $post = array(
@@ -336,29 +346,34 @@ class accordion_pro {
       $this->notices[] = __('Accordion Updated. <a href="?page=accordion_pro">Manage</a>', 'accordion_pro');
     } else {
       $clean['id'] = $_GET['id'] = $post['ID'] = wp_insert_post($post); // So we can show the edit accordion page.
-      $this->notices[] = __('Accordion Added. <a href="?page=accordion_pro">Manage</a>', 'accordion_pro');
+      if (!$clone) $this->notices[] = __('Accordion Created. <a href="?page=accordion_pro">Manage</a>', 'accordion_pro');
     }
 
     // Update jQ opts
     foreach($this->jQueryOptions as $key => $default) {
       $replaceUnderscores = strrpos($key, '.') ? str_replace('.', '_', $key) : $key;
       if ($key !== 'onSlideOpen' && $key !== 'onSlideClose') {
-        $this->update_post_meta($post['ID'], $key, $this->sanitize($_POST[$replaceUnderscores]));
+        if (isset($_POST[$replaceUnderscores])) $this->update_post_meta($post['ID'], $key, $this->sanitize($_POST[$replaceUnderscores]));
       }
     }
 
     // reformat content, but don't do it retroactively
     // if you wanted to retroactively bugger up existing accordion html, you'd use
     // wpautop on the content in update_accordionCache();
-    foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
+    if (isset($_POST['content'])) {
+      foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
+    }
 
     // The content title and content are arrays, so serialize them.
     foreach($this->accContent as $key => $value) {
-      $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
+      if (isset($_POST[$key])) $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
     }
 
     // Now make the cache
     $this->update_accordionCache($this->get_accordion_settings($clean['id'], true));
+
+    // Return the ID
+    return $clean['id'];
   }
 
   /**
@@ -441,7 +456,7 @@ class accordion_pro {
         // nested array
         if (strrpos($key, '.')) {
           $newKey = explode('.', $key);
-          if (!$options[$newKey[0]]) $options[$newKey[0]] = array();
+          if (!array_key_exists($newKey[0], $options)) $options[$newKey[0]] = array();
 
           // custom icons for each tab
           if ($newKey[1] == 'customIcons' || $newKey[1] == 'customColours') {
@@ -480,10 +495,42 @@ class accordion_pro {
    * Delete accordion
    */
 
-  public function delete_accordion($id, $notice=true) {
+  public function delete_accordion($id) {
     wp_delete_post($id);
-    if ($notice) $this->notices[] = __('Accordion Deleted.', 'accordion_pro');
+    $this->notices[] = __('Accordion Deleted.', 'accordion_pro');
   }
+
+  /**
+   * Clone accordion
+   */
+
+  public function clone_accordion($id) {
+    // ref to clone target
+    $accordion = $this->get_accordion_settings($id, true);
+
+    // create a new accordion
+    $cloneId = $this->update_accordion($accordion['post_title'] . " copy");
+
+    // clone jQ opts
+    foreach($this->jQueryOptions as $key => $default) {
+      $replaceUnderscores = strrpos($key, '.') ? str_replace('.', '_', $key) : $key;
+      if ($key !== 'onSlideOpen' && $key !== 'onSlideClose') {
+        $this->update_post_meta($cloneId, $key, $accordion['jQuerySettings'][$key]);
+      }
+    }
+
+    // clone content
+    foreach($this->accContent as $key => $default) {
+      $this->update_post_meta($cloneId, $key, base64_encode(serialize($accordion['acc_content'][$key])));
+    }
+
+    // create html
+    $this->update_accordionCache($this->get_accordion_settings($cloneId, true));
+
+    // set notice
+    $this->notices[] = __('Accordion Cloned. <a href="?page=accordion_pro&mode=edit&id=' . $cloneId  . '">Edit</a>', 'accordion_pro');
+  }
+
 
   /**
    * CLIENT-SIDE RENDERING
@@ -618,6 +665,7 @@ class accordion_pro {
     return $accordion;
   }
 
+
   /**
    * SETTINGS PAGE
    */
@@ -689,6 +737,7 @@ class accordion_pro {
     wp_die();
   }
 
+
   /**
    * PLUGIN HELPERS
    */
@@ -718,6 +767,7 @@ class accordion_pro {
       echo '</div>';
     }
   }
+
 
   /**
    * UTILITIES

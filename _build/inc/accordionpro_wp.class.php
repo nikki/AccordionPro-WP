@@ -353,18 +353,20 @@ class accordion_pro {
     foreach($this->jQueryOptions as $key => $default) {
       $replaceUnderscores = strrpos($key, '.') ? str_replace('.', '_', $key) : $key;
       if ($key !== 'onSlideOpen' && $key !== 'onSlideClose') {
-        $this->update_post_meta($post['ID'], $key, $this->sanitize($_POST[$replaceUnderscores]));
+        if (isset($_POST[$replaceUnderscores])) $this->update_post_meta($post['ID'], $key, $this->sanitize($_POST[$replaceUnderscores]));
       }
     }
 
     // reformat content, but don't do it retroactively
     // if you wanted to retroactively bugger up existing accordion html, you'd use
     // wpautop on the content in update_accordionCache();
-    foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
+    if (isset($_POST['content'])) {
+      foreach($_POST['content'] as $key => $value) $_POST['content'][$key] = ($this->get_option('enable_formatting') ? wpautop($value) : $value);
+    }
 
     // The content title and content are arrays, so serialize them.
     foreach($this->accContent as $key => $value) {
-      $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
+      if (isset($_POST[$key])) $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
     }
 
     // Now make the cache
@@ -454,7 +456,7 @@ class accordion_pro {
         // nested array
         if (strrpos($key, '.')) {
           $newKey = explode('.', $key);
-          if (!$options[$newKey[0]]) $options[$newKey[0]] = array();
+          if (!array_key_exists($newKey[0], $options)) $options[$newKey[0]] = array();
 
           // custom icons for each tab
           if ($newKey[1] == 'customIcons' || $newKey[1] == 'customColours') {

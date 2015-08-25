@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Accordion Pro WP Examples</title>
+    <title>Accordion Pro WP Documentation</title>
     <link rel="stylesheet" href="../css/accordionpro.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -19,6 +19,8 @@
         .links { margin-top: 20px }
         .links li { float: left; margin-right: 22px }
         .links + h2 { clear: both }
+
+        #four { margin: 0 auto }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="../js/jquery.accordionpro.min.js"></script>
@@ -28,8 +30,11 @@
     <div class="container">
         <h1>Accordion Pro WP Examples</h1>
 
-        <h2>Stitch theme</h2>
-        <div id="one">
+        <h2>Demo Suite Available</h2>
+        <p>Don't forget - you can use the <a href="http://stitchui.com/accordion-pro-demo-suite/?APWP=1" target="_blank">demo suite</a> to help customise your plugin.  Use the dropdowns to quickly visualise your settings - it's much easier than doing it by trial and error on your own site.<br /><br /></p>
+
+        <h2>Stitch theme with linkable slides and a blue colour scheme</h2>
+        <div id="one" class="accordionPro">
             <ol>
                 <li>
                     <h2><span>Slide One</span></h2>
@@ -71,79 +76,15 @@
                 <p>Please enable JavaScript to get the full experience.</p>
             </noscript>
             <script>
-                function callback() {
-                    $('#one').find('.ap-caption').each(function() {
-                        if (!$(this).parents('.slide').hasClass('selected')) {
-                            $(this).fadeOut();
-                        } else {
-                            if (!$(this).is(':visible')) $(this).fadeIn();
-                        }
-                    });
-                }
-
                 $('#one').accordionPro({
-                    autoPlay : true,
-                    onSlideOpen : callback,
-                    onSlideClose : callback,
                     theme : 'stitch',
-                    rounded : true
-                }).find('.ap-caption:first').show();
-            </script>
-        </div>
-
-        <h3>Options used:</h3>
-        <pre>
-{
-    autoPlay : true,
-    theme : 'stitch',
-    rounded : true
-}</pre>
-
-        <h2>Transparent theme</h2>
-        <div id="two">
-            <ol>
-                <li>
-                    <h2><span>Slide One</span></h2>
-                    <div>
-                        <img src="img-demo/1.jpg" alt="image" />
-                        <p class="ap-caption">Slide One</p>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Slide Two</span></h2>
-                    <div>
-                        <img src="img-demo/2.jpg" alt="image" />
-                        <p class="ap-caption">Slide Two</p>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Slide Three</span></h2>
-                    <div>
-                        <img src="img-demo/3.jpg" alt="image" />
-                        <p class="ap-caption">Slide Three</p>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Slide Four</span></h2>
-                    <div>
-                        <img src="img-demo/4.jpg" alt="image" />
-                        <p class="ap-caption">Slide Four</p>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Slide Five</span></h2>
-                    <div>
-                        <img src="img-demo/5.jpg" alt="image" />
-                        <p class="ap-caption">Slide Five</p>
-                    </div>
-                </li>
-            </ol>
-            <noscript>
-                <p>Please enable JavaScript to get the full experience.</p>
-            </noscript>
-            <script>
-                $('#two').accordionPro({
-                    theme : 'transparent',
+                    colour : {
+                        scheme : 'blue',
+                    },
+                    tab : {
+                        icon : 'chevron',
+                        font : 'Arial'
+                    },
                     linkable : true
                 });
             </script>
@@ -155,22 +96,123 @@
 
         <ul class="links">
             <li>Links:</li>
-            <li><a href="#two-slide-1">#two-slide-1</a></li>
-            <li><a href="#two-slide-2">#two-slide-2</a></li>
-            <li><a href="#two-slide-3">#two-slide-3</a></li>
-            <li><a href="#two-slide-4">#two-slide-4</a></li>
-            <li><a href="#two-slide-5">#two-slide-5</a></li>
+            <li><a href="#one-slide-1">#one-slide-1</a></li>
+            <li><a href="#one-slide-2">#one-slide-2</a></li>
+            <li><a href="#one-slide-3">#one-slide-3</a></li>
+            <li><a href="#one-slide-4">#one-slide-4</a></li>
+            <li><a href="#one-slide-5">#one-slide-5</a></li>
         </ul>
 
         <h3>Options used:</h3>
-        <pre>
-{
-    theme : 'transparent',
+        <pre>{
+    theme : 'stitch',
+    colour : {
+        scheme : 'blue',
+    },
+    tab : {
+        icon : 'chevron',
+        font : 'Arial'
+    },
     linkable : true
 }</pre>
 
-        <h2>Dark theme</h2>
-        <div id="three">
+
+        <h2>Stitch theme with custom colours and icons</h2>
+        <div id="two" class="accordionPro">
+            <ol>
+                <li>
+                    <h2><span>Slide One</span></h2>
+                    <div>
+                        <img src="img-demo/1.jpg" alt="image" />
+                        <p class="ap-caption">Slide One</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Two</span></h2>
+                    <div>
+                        <img src="img-demo/2.jpg" alt="image" />
+                        <p class="ap-caption">Slide Two</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Three</span></h2>
+                    <div>
+                        <img src="img-demo/3.jpg" alt="image" />
+                        <p class="ap-caption">Slide Three</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Four</span></h2>
+                    <div>
+                        <img src="img-demo/4.jpg" alt="image" />
+                        <p class="ap-caption">Slide Four</p>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Slide Five</span></h2>
+                    <div>
+                        <img src="img-demo/5.jpg" alt="image" />
+                        <p class="ap-caption">Slide Five</p>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+            <script>
+                function slideOpen() {
+                    this.find('.ap-caption').delay(800).fadeIn();
+                }
+
+                function slideClose() {
+                    this.find('.ap-caption').fadeOut();
+                }
+
+                $('#two').accordionPro({
+                    autoPlay : true,
+                    onSlideOpen : slideOpen,
+                    onSlideClose : slideClose,
+                    theme : 'stitch',
+                    tab : {
+                        font : 'Helvetica Neue',
+                        icon : 'custom',
+                        customIcons : [
+                          '../documentation/img-demo/user-alt.png',
+                          '../documentation/img-demo/chat-alt.png',
+                          '../documentation/img-demo/letter-alt.png',
+                          '../documentation/img-demo/search-alt.png',
+                          '../documentation/img-demo/leaf-alt.png'
+                        ],
+                        customColours : [
+                          '#c25252',
+                          '#ca9859',
+                          '#96ba5f',
+                          '#59abb7',
+                          '#bb6098'
+                        ]
+                    },
+                    rounded : true
+                });
+            </script>
+        </div>
+
+        <p class="note">
+            <b>Note:</b> custom icons and custom colours are set in the content editor for each tab.
+        </p>
+
+        <h3>Options used:</h3>
+        <pre>{
+    autoPlay : true,
+    theme : 'stitch',
+    tab : {
+        font : 'Helvetica Neue',
+        icon : 'custom'
+    },
+    rounded : true
+}</pre>
+
+        <h2>Bordered theme, starting closed, with a teal colour scheme and gradient style</h2>
+        <div id="three" class="accordionPro">
             <ol>
                 <li>
                     <h2><span>Slide One</span></h2>
@@ -215,8 +257,11 @@
                 $('#three').accordionPro({
                     autoPlay : true,
                     startClosed : true,
-                    orientation : 'vertical',
-                    theme : 'dark',
+                    theme : 'bordered',
+                    colour : {
+                        scheme : 'teal',
+                        style : 'gradient'
+                    },
                     rounded : true
                 });
             </script>
@@ -227,17 +272,19 @@
         </p>
 
         <h3>Options used:</h3>
-        <pre>
-{
+        <pre>{
     autoPlay : true,
     startClosed : true,
-    orientation : 'vertical',
-    theme : 'dark',
+    theme : 'bordered',
+    colour : {
+        scheme : 'teal',
+        style : 'gradient'
+    },
     rounded : true
 }</pre>
 
         <h2>Light theme</h2>
-        <div id="four">
+        <div id="four" class="accordionPro">
             <ol>
                 <li>
                     <h2><span>Slide One</span></h2>
@@ -280,25 +327,32 @@
             </noscript>
             <script>
                 $('#four').accordionPro({
+                    orientation : 'vertical',
                     startClosed : true,
-                    theme : 'light'
+                    theme : 'bordered',
+                    colour : {
+                        scheme : 'white',
+                        style : 'gradient'
+                    },
+                    verticalWidth : 600
                 });
             </script>
         </div>
 
-        <p class="note">
-            <b>Note:</b> by popular request, you can now start the plugin in a closed position!
-        </p>
-
         <h3>Options used:</h3>
-        <pre>
-{
+        <pre>{
+    orientation : 'vertical',
     startClosed : true,
-    theme : 'light'
+    theme : 'bordered',
+    colour : {
+        scheme : 'white',
+        style : 'gradient'
+    },
+    verticalWidth : 600
 }</pre>
 
         <h2>Basic theme</h2>
-        <div id="five">
+        <div id="five" class="accordionPro">
             <ol>
                 <li>
                     <h2><span>Slide One</span></h2>
@@ -342,23 +396,42 @@
             <script>
                 $('#five').accordionPro({
                     theme : 'basic',
-                    rtl : true
+                    rtl : true,
+                    colour: {
+                        scheme : 'red',
+                        style : 'gradient'
+                    },
+                    rounded : true
                 });
             </script>
         </div>
 
         <p class="note">
-            <b>Note:</b> another oft-requested feature, right-to-left support, has also been implemented in this version.
+            <b>Note:</b> this example shows the right-to-left option in action.
         </p>
 
         <h3>Options used:</h3>
-        <pre>
-{
+        <pre>{
     theme : 'basic',
-    rtl : true
+    rtl : true,
+    colour: {
+        scheme : 'red',
+        style : 'gradient'
+    },
+    rounded : true
 }</pre>
 
     </div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52406079-1', 'auto');
+  ga('send', 'event', 'engagement', 'view documentation', 'APWP');
+</script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
       - Size
       - Font size
       - Font family
-      - Tab Icon
+      - Tab icon
     - Panel settings
       - Scrollable (w/ customised scrollbars)
   - Copy shortcode/template tag to clipboard
@@ -16,7 +16,7 @@
   - Custom colours and icons for each individual tab
     - Colour picker for custom tab colour
     - Image selector for custom tab icon
-  - NB: *DEACTIVATE THE OLD PLUGIN VERSION BEFORE UPDATING TO v3!*
+  - NB: *DEACTIVATE AND DELETE THE OLD PLUGIN BEFORE UPDATING TO v3!*
 
 ### v2.1 - 21/05/2015
   - Fixed bug introduced in WP4 (tabbing between visual and text editors)

@@ -46,13 +46,13 @@ $accordion_pro = new accordion_pro();
 register_activation_hook(__FILE__, 'init_options');
 function init_options() {
   global $accordion_pro;
-
-  // init options
-  $accordion_pro->init_options();
+  $v = $accordion_pro->load_options();
 
   // upgrade previous version
-  $v = $accordion_pro->load_options();
   if ($v['version'] != '3.0.0') {
     $accordion_pro->upgrade();
   }
+
+  // init options
+  $accordion_pro->init_options();
 }

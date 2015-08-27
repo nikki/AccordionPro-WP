@@ -545,7 +545,7 @@ class accordion_pro {
     wp_enqueue_script('jquery');
 
     // Register Accordion JS
-    wp_register_script('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/js/jquery.accordionpro.min.js', array('jquery'), '2.0.0', false);
+    wp_register_script('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/js/jquery.accordionpro.min.js', array('jquery'), '2.0.1', false);
   }
 
   /**

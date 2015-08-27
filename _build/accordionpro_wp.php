@@ -3,7 +3,7 @@
 Plugin Name:    Accordion Pro WP
 Plugin URI:     http://stitchui.com/accordion-pro-wp/
 Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.
-Version:        3.0.0
+Version:        3.0.1
 Author:         Stitch UI
 Author URI:     http://stitchui.com
 Text Domain:    accordion_pro
@@ -24,7 +24,7 @@ if (!class_exists('WP')) {
  * Define plugin version
  */
 
-define('ACCORDION_PRO_VERSION', '3.0.0');
+define('ACCORDION_PRO_VERSION', '3.0.1');
 
 /**
  * Require class
@@ -49,7 +49,7 @@ function init_options() {
   $v = $accordion_pro->load_options();
 
   // upgrade previous version
-  if ($v['version'] != '3.0.0') {
+  if ($v['version'] != '3.0.1') {
     $accordion_pro->upgrade();
   }
 

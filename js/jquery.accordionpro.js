@@ -83,7 +83,7 @@ function getPrefixed(prop){
 /*!
  * Plugin Name:    Accordion Pro JS - a responsive accordion plugin for jQuery
  * Plugin URI:     http://stitchui.com/accordion-pro-js/
- * Version:        2.0.0
+ * Version:        2.0.1
  * Author:         Nicola Hibbert
  * Author URI:     http://stitchui.com
  *
@@ -136,9 +136,9 @@ function getPrefixed(prop){
 
       if (!sheet) return;
       if ('insertRule' in sheet) {
-        sheet.insertRule(selector + '{' + rules + '}', sheet.cssRules.length);
+        sheet.insertRule(selector + '{' + rules + '}', (sheet.cssRules ? sheet.cssRules.length : 0));
       } else if ('addRule' in sheet) {
-        sheet.addRule(selector, rules, sheet.rules.length);
+        sheet.addRule(selector, rules, (sheet.rules ? sheet.rules.length : 0));
       }
     }
 
@@ -858,10 +858,11 @@ function getPrefixed(prop){
       resize : function() { // +orientationchange
         var timer = 0;
 
-        // set initial scale (before 200ms timeout)
-        core.scalePlugin();
-
         if (horizontal && settings.responsive) {
+          // set initial scale (before 200ms timeout)
+          core.scalePlugin();
+
+          // on load...
           $window.on('load.accordionPro resize.accordionPro orientationchange.accordionPro', function() {
             // approximates onresizeend
             clearTimeout(timer);
@@ -1249,6 +1250,16 @@ function getPrefixed(prop){
         tabs
           .off('.accordionPro')
           .removeClass();
+      },
+
+      debug : function() {
+        return {
+          elem : elem,
+          settings : settings,
+          methods : methods,
+          setup : setup,
+          core : core
+        };
       }
     };
 
@@ -1351,12 +1362,17 @@ function getPrefixed(prop){
 
     // otherwise, call method on current instance
     } else if (typeof method === 'string' && instance[method]) {
-      // zero-based index for trigger method
-      if (method === 'trigger' && typeof param === 'number') param -= 1;
+      // debug method isn't chainable b/c we need the debug object to be returned
+      if (method === 'debug') {
+        return instance[method].call(elem);
+      } else {
+        // zero-based index for trigger method
+        if (method === 'trigger' && typeof param === 'number') param -= 1;
 
-      // chainable methods
-      instance[method].call(elem, param);
-      return elem;
+        // chainable methods
+        instance[method].call(elem, param);
+        return elem;
+      }
     }
   };
 

@@ -195,7 +195,7 @@ class accordion_pro {
   public function admin_init() {
     // Check if we're on an accordion admin page
     // Strpos can return 0 as first index, so need to check strict equality
-    if (isset($_GET) && isset($_GET['page']) && strpos($_GET['page'], 'accordion_pro') === false) return;
+    if (strpos($_SERVER['REQUEST_URI'], 'accordion_pro') === false) return;
 
     // Disable autosave
     wp_deregister_script('autosave');
@@ -385,6 +385,9 @@ class accordion_pro {
 
     $options = array();
     $extratags = array();
+    $extratags['div'] = array(
+      'style' => array()
+    );
     $extratags['object'] = array(
       'height' => array(),
       'width' => array()
@@ -432,7 +435,7 @@ class accordion_pro {
 
         // caption
         if (isset($accordion['acc_content']['content_caption_enabled'][$key])) {
-          $accordion['post_content'] .= '<div class="ap-caption ap-caption-'.$key.'">'.wp_kses_post($accordion['acc_content']['content_caption'][$key]).'</div>';
+          $accordion['post_content'] .= '<div class="ap-caption ap-caption-' . $key . '">' . wp_kses_post($accordion['acc_content']['content_caption'][$key]) . '</div>';
         }
 
         // end post content
@@ -643,7 +646,7 @@ class accordion_pro {
       // unserialize acc content
       if (!empty($accordion['acc_content']['content'])) {
         foreach($this->accContent as $key => $value) {
-          $accordion['acc_content'][$key] = unserialize(base64_decode($accordion['acc_content'][$key]));
+          $accordion['acc_content'][$key] = unserialize(@base64_decode($accordion['acc_content'][$key]));
         }
       }
 

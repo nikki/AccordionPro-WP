@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v3.0.2 - 03/09/15
+  - Minor bug fix (wrt. base64_encode)
+
 ### v3.0.1 - 27/08/15
   - Updated APJS to v2.0.1
 

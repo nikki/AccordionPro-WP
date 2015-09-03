@@ -207,8 +207,8 @@ jQuery(function($) {
     },
 
     initIconPicker : function() {
-      var $picker = $('.icon-wrapper button'),
-          $preview = $('.icon-preview');
+      var $picker = $('.ap-inner .icon-wrapper button'),
+          $preview = $('.ap-inner .icon-preview');
 
       $picker.on('click', function(e) {
         var $this = $(this);

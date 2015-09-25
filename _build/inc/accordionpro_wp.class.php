@@ -561,6 +561,9 @@ class accordion_pro {
 
     // load css
     wp_enqueue_style('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/css/accordionpro.css.php?ids=' . $ids);
+
+    // load accordion js
+    wp_enqueue_script('accordion_pro');
   }
 
   /**
@@ -575,6 +578,7 @@ class accordion_pro {
    * Recursively search post content for shortcode
    */
 
+/*
   public function search_for_shortcode($content, $ids = array()) {
     // first occurence of shortcode
     $start = strpos($content, '[accordion_pro');
@@ -594,6 +598,7 @@ class accordion_pro {
 
     return $ids;
   }
+*/
 
   /**
    * Call accordion based on ID
@@ -601,9 +606,6 @@ class accordion_pro {
 
   public function get_accordion($atts) {
     if (isset($atts) && is_array($atts)) {
-      // load accordion js only into page with shortcode
-      wp_enqueue_script('accordion_pro');
-
       // cached accordion html
       $accordion = $this->get_accordion_settings($atts['id']);
 

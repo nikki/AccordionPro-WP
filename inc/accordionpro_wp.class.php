@@ -575,6 +575,7 @@ class accordion_pro {
    * Recursively search post content for shortcode
    */
 
+/*
   public function search_for_shortcode($content, $ids = array()) {
     // first occurence of shortcode
     $start = strpos($content, '[accordion_pro');
@@ -594,6 +595,7 @@ class accordion_pro {
 
     return $ids;
   }
+*/
 
   /**
    * Call accordion based on ID

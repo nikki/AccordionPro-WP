@@ -6,7 +6,7 @@ module.exports = function (grunt) {
               ' * Plugin Name:    Accordion Pro WP - a responsive accordion plugin for WordPress\n' +
               ' * Plugin URI:     http://accordionpro.nicolahibbert.com\n' +
               ' * Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.\n' +
-              ' * Version:        3.0\n' +
+              ' * Version:        3.0.3\n' +
               ' * Author:         Nicola Hibbert\n' +
               ' * Author:         Mike Rogers\n' +
               ' * Author URI:     http://stitchui.com/accordion-pro-wp/\n' +
@@ -27,6 +27,22 @@ module.exports = function (grunt) {
               ' * along with this program; if not, write to the Free Software\n' +
               ' * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA\n' +
               ' */\n',
+
+      cssmin: {
+        target: {
+          files: {
+            'css/admin.min.css' : 'css/admin.css'
+          }
+        }
+      },
+
+      uglify: {
+        build: {
+          files: {
+            'js/admin.min.js' : 'js/admin.js'
+          }
+        }
+      },
 
       sync: {
         toBuild: {
@@ -53,10 +69,12 @@ module.exports = function (grunt) {
         }
       },
 
+      clean: ['_build/css/admin.css', '_build/js/admin.js'],
+
       watch: {
         scripts: {
           files: ['css/*.css', 'js/*.js', '**/*.php'],
-          tasks: ['sync'],
+          tasks: ['default'],
           options: {
             spawn: true,
             livereload: true
@@ -66,9 +84,12 @@ module.exports = function (grunt) {
     });
 
     // These plugins provide necessary tasks
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-sync');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default task
-    grunt.registerTask('default', 'sync');
+    grunt.registerTask('default', ['cssmin', 'uglify', 'sync', 'clean']);
   };

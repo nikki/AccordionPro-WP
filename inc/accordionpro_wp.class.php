@@ -201,8 +201,8 @@ class accordion_pro {
     wp_deregister_script('autosave');
 
     // Register admin CSS & JS
-    wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.css');
-    wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.js', array('jquery'));
+    wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.min.css');
+    wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.min.js', array('jquery'));
 
     // Enqueue admin CSS & JS
     wp_enqueue_style(array('accordion_pro_admin', 'thickbox', 'wp-color-picker'));

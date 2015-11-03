@@ -201,8 +201,8 @@ class accordion_pro {
     wp_deregister_script('autosave');
 
     // Register admin CSS & JS
-    wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.css');
-    wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.js', array('jquery'));
+    wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.min.css');
+    wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.min.js', array('jquery'));
 
     // Enqueue admin CSS & JS
     wp_enqueue_style(array('accordion_pro_admin', 'thickbox', 'wp-color-picker'));
@@ -561,9 +561,6 @@ class accordion_pro {
 
     // load css
     wp_enqueue_style('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/css/accordionpro.css.php?ids=' . $ids);
-
-    // load accordion js
-    wp_enqueue_script('accordion_pro');
   }
 
   /**
@@ -606,6 +603,9 @@ class accordion_pro {
 
   public function get_accordion($atts) {
     if (isset($atts) && is_array($atts)) {
+      // load accordion js only into page with shortcode
+      wp_enqueue_script('accordion_pro');
+
       // cached accordion html
       $accordion = $this->get_accordion_settings($atts['id']);
 

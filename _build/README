@@ -1,10 +1,13 @@
 ## CHANGELOG
 
+### v3.0.3 - 03/11/15
+  - Updated Accordion Pro JS to v2.0.2
+
 ### v3.0.2 - 03/09/15
   - Minor bug fix (wrt. base64_encode)
 
 ### v3.0.1 - 27/08/15
-  - Updated APJS to v2.0.1
+  - Updated Accordion Pro JS to v2.0.1
 
 ### v3.0.0 - 26/08/2015
   - Implemented Accordion Pro JS v2

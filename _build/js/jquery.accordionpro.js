@@ -83,7 +83,7 @@ function getPrefixed(prop){
 /*!
  * Plugin Name:    Accordion Pro JS - a responsive accordion plugin for jQuery
  * Plugin URI:     http://stitchui.com/accordion-pro-js/
- * Version:        2.0.2
+ * Version:        2.0.3
  * Author:         Nicola Hibbert
  * Author URI:     http://stitchui.com
  *
@@ -115,10 +115,11 @@ function getPrefixed(prop){
         offset = 0,
         padding = 0,
         tabBorder = 0,
+        panelPadding = (settings.panel && settings.panel.padding && typeof settings.panel.padding === 'number') ? settings.panel.padding : 0,
         horizontal = settings.orientation === 'horizontal' ? 1 : 0,
-        easing = 'ease-in-out',
         fitToContent = !horizontal && settings.verticalSlideHeight === 'fitToContent' ? true : false,
         transparent = (settings.theme === 'transparent'),
+        easing = 'ease-in-out',
         touch = !!('ontouchstart' in window),
         sheet;
 
@@ -365,7 +366,7 @@ function getPrefixed(prop){
           // compensate for selected slide (position)
           if (selected && index > slides.index(selected)) {
             if (fitToContent) {
-              calc.position.top += selected.height() - tab.h;
+              calc.position.top += transparent ? selected.children('div').height() - tab.h : selected.children('div').height(); // do not change this!
             } else {
               calc.position.top += slide.h;
             }
@@ -396,24 +397,28 @@ function getPrefixed(prop){
        * Set all slide widths, heights, positions
        */
 
-      setSlidesDimensions : function() {
+      setSlidesDimensions : function(reflow) {
         var _this = this, selected;
 
-        // cache slide length
-        slide.l = slides.length;
+        if (!reflow) {
+          // cache slide length
+          slide.l = slides.length;
 
-        // calculate global slide dimensions
-        if (horizontal) {
-          slide.w = parent.w - slide.l * tab.h;
-          slide.h = parent.h;
+          // calculate global slide dimensions
+          if (horizontal) {
+            slide.w = parent.w - slide.l * tab.h;
+            slide.h = parent.h;
+          } else {
+            slide.w = tabs.eq(0).width(); // px value
+            slide.h = parent.h - slide.l * tab.h;
+          }
+
+          // set selected slide class...
+          if (!settings.startClosed) { // ... on first run, if startClosed option is not enabled
+            selected = slides.eq(settings.tab.selected - 1).addClass('selected');
+          }
         } else {
-          slide.w = tabs.eq(0).width(); // px value
-          slide.h = parent.h - slide.l * tab.h;
-        }
-
-        // set selected slide class if startClosed option is not enabled
-        if (!settings.startClosed) {
-          selected = slides.eq(settings.tab.selected - 1).addClass('selected');
+          selected = slides.filter('.selected');
         }
 
         // set dimensions of each slide
@@ -497,7 +502,7 @@ function getPrefixed(prop){
           }
         } else {
           if (fitToContent) {
-            calc.height = slides.eq(index).children('div').height();
+            calc.height = 'auto';
           } else {
             calc.height = transparent ? (slide.h + tab.h) : slide.h - offset - padding;
           }
@@ -520,6 +525,7 @@ function getPrefixed(prop){
        */
 
       setPanelDimensions : function(calc) {
+        // set panel dimensions
         this
           .width(calc.width)
           .height(calc.height)
@@ -581,6 +587,19 @@ function getPrefixed(prop){
           addRule('#' + elem[0].id + '.stitch .slide-' + (index + 1) + ' > :first-child', 'background-image: url("data:image/png;base64,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") !important');
           addRule('#' + elem[0].id + ' .slide-' + (index + 1) + '.selected > :first-child:before', 'background-color: ' + colours[index] + ' !important');
         });
+      },
+
+
+      /**
+       * Set panel padding
+       */
+
+      setPanelsPadding : function() {
+        if (panelPadding) {
+          panels.each(function() {
+            $(this).wrapInner('<div class="ap-inner"></div>').find('.ap-inner').css('padding', panelPadding);
+          });
+        }
       },
 
 
@@ -691,6 +710,7 @@ function getPrefixed(prop){
         this.setTabClasses();
         this.setCustomTabImages();
         this.setCustomTabColours();
+        this.setPanelsPadding();
 
         // check images are loaded before setting up slide positions
         $(window).on('load', function() {
@@ -883,7 +903,7 @@ function getPrefixed(prop){
        * Bind resize and orientationchange
        */
 
-      resize : function() { // +orientationchange
+      resize : function() {
         var timer = 0;
 
         if (horizontal && settings.responsive) {
@@ -899,6 +919,16 @@ function getPrefixed(prop){
             timer = setTimeout(function() {
               core.scalePlugin();
             }, 200);
+          });
+        }
+
+        if (fitToContent) {
+          $window.on('resize.accordionPro orientationchange.accordionPro', function() {
+            // trigger fitToContent
+            core.fitToContent();
+
+            // reflow slide positions
+            setup.setSlidesDimensions(true);
           });
         }
       },
@@ -1092,9 +1122,9 @@ function getPrefixed(prop){
        */
 
       fitToContent : function(p) {
-        var height = p && (p.triggerHeight + tab.h) || slides.eq(core.currentSlide).height();
+        var height = p && (p.triggerHeight + tab.h) || slides.eq(core.currentSlide).children('div').height() + tab.h; // don't change this
 
-        // // set height
+        // set height
         elem.height(((slide.l - 1) * tab.h) + height);
       },
 
@@ -1359,7 +1389,8 @@ function getPrefixed(prop){
     /* panels */
     panel : {
       scrollable : false,                   // trigger scrollbar on vertical overflow
-      scaleImages : true                    // scales images to fit slide width and height
+      scaleImages : true,                   // scales images to fit slide width and height
+      padding : 0                           // adds internal padding (px [integer]) to slide panels
     },
 
     /* events */

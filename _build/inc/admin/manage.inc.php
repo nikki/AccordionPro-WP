@@ -255,6 +255,10 @@ if (!class_exists('WP')) {
         'panel.scaleImages' => array(
           'desc' => 'Scale images to fit slide width and height',
           'value' => true
+        ),
+        'panel.padding' => array(
+          'desc' => 'Adds internal padding (px [integer]) to slide panels',
+          'value' => 0
         )
       ),
 

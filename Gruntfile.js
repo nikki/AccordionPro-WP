@@ -6,7 +6,7 @@ module.exports = function (grunt) {
               ' * Plugin Name:    Accordion Pro WP - a responsive accordion plugin for WordPress\n' +
               ' * Plugin URI:     http://accordionpro.nicolahibbert.com\n' +
               ' * Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.\n' +
-              ' * Version:        3.0.3\n' +
+              ' * Version:        3.0.4\n' +
               ' * Author:         Nicola Hibbert\n' +
               ' * Author:         Mike Rogers\n' +
               ' * Author URI:     http://stitchui.com/accordion-pro-wp/\n' +
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         toBuild: {
           files: [
             {
-              src: ['*.php', '*.txt', 'README', 'css/**', 'js/**', 'inc/**'],
+              src: ['*.php', '*.txt', 'CHANGELOG', 'css/**', 'js/**', 'inc/**'],
               dest: '_build'
             }
           ],

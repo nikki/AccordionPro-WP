@@ -63,6 +63,7 @@ class accordion_pro {
 
     'panel.scrollable'          => false,
     'panel.scaleImages'         => true,
+    'panel.padding'             => 0,
 
     'activateOn'                => 'click',
     'onSlideOpen'               => 'function() {}',

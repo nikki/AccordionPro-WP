@@ -148,12 +148,19 @@ jQuery(function($) {
       slides.on('click', '.ajax .wp-switch-editor', function() {
         var $this = $(this),
           classname = $this.attr('class').split(' ')[1].split('-')[1],
-          $parent = $this.parent().parent();
+          $parent = $this.parent().parent(),
+          id = $(this).data('wp-editor-id');
 
         // backwards compatibility
         if (version >= 4) $parent = $parent.parent();
 
-        switchEditors.switchto(this);
+        // changes to editor initialisation in wp 4.3
+        if (id) {
+          window.switchEditors.go(id, classname);
+        } else {
+          switchEditors.switchto(this);
+        }
+
         $parent.removeClass().addClass('ap-inner ' + classname + '-active');
       });
     },

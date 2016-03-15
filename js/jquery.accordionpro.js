@@ -83,12 +83,13 @@ function getPrefixed(prop){
 /*!
  * Plugin Name:    Accordion Pro JS - a responsive accordion plugin for jQuery
  * Plugin URI:     http://stitchui.com/accordion-pro-js/
- * Version:        2.0.3
- * Author:         Nicola Hibbert
+ * Version:        2.0.4
+ * Author:         Stitch UI
  * Author URI:     http://stitchui.com
  *
- * Copyright:      (c) 2011-2015 Stitch UI
+ * Copyright:      (c) 2011-2016 Stitch UI
  */
+
 ;(function($) {
 
   function AccordionPro(elem, options) {
@@ -258,7 +259,8 @@ function getPrefixed(prop){
         slides.each(function(index) {
           $(this)
             .addClass('slide slide-' + (index + 1))
-            .attr('data-slide-name', elem[0].id + '-slide-' + (index + 1));
+            .attr('data-slide-name', elem[0].id + '-slide-' + (index + 1))
+            .css({ 'zIndex' : 100 + index });
         });
       },
 
@@ -676,11 +678,6 @@ function getPrefixed(prop){
                 });
               }
             }
-
-            // slides zIndex
-            slides.each(function(index) {
-              $(this).css({ 'zIndex' : 100 + index });
-            });
           }
 
           // ie 7 and below
@@ -749,10 +746,18 @@ function getPrefixed(prop){
       click : function() {
         if (settings.activateOn === 'click') {
           // trigger animation cycle
-          tabs.on('click.accordionPro touchstart.accordionPro', methods.trigger);
+          // if (window.PointerEvent) {
+          //   tabs.on('pointerdown.accordionPro', methods.trigger);
+          // } else {
+            tabs.on('click.accordionPro touchstart.accordionPro', methods.trigger);
+          // }
 
           if (settings.startClosed) {
-            tabs.on('click.accordionPro.closed touchstart.accordionPro.closed', core.triggerFromClosed);
+            // if (window.PointerEvent) {
+            //   tabs.on('pointerdown.accordionPro.closed', core.triggerFromClosed);
+            // } else {
+              tabs.on('click.accordionPro.closed touchstart.accordionPro.closed', core.triggerFromClosed);
+            // }
           }
         }
       },
@@ -1303,6 +1308,7 @@ function getPrefixed(prop){
           .off('.accordionPro')
           .removeData('accordionPro')
           .removeAttr('style')
+          .removeAttr('id')
           .removeClass();
 
         slides

@@ -202,8 +202,8 @@ class accordion_pro {
     wp_deregister_script('autosave');
 
     // Register admin CSS & JS
-    wp_register_style('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/css/admin.min.css');
-    wp_register_script('accordion_pro_admin', WP_PLUGIN_URL . '/accordionpro_wp/js/admin.min.js', array('jquery'));
+    wp_register_style('accordion_pro_admin', plugin_dir_url(dirname(__FILE__)) . 'css/admin.min.css');
+    wp_register_script('accordion_pro_admin', plugin_dir_url(dirname(__FILE__)) . 'js/admin.min.js', array('jquery'));
 
     // Enqueue admin CSS & JS
     wp_enqueue_style(array('accordion_pro_admin', 'thickbox', 'wp-color-picker'));
@@ -367,7 +367,7 @@ class accordion_pro {
 
     // The content title and content are arrays, so serialize them.
     foreach($this->accContent as $key => $value) {
-      if (isset($_POST[$key])) $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
+      $this->update_post_meta($post['ID'], $key, base64_encode(serialize($_POST[$key])));
     }
 
     // Now make the cache
@@ -549,7 +549,7 @@ class accordion_pro {
     wp_enqueue_script('jquery');
 
     // Register Accordion JS
-    wp_register_script('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/js/jquery.accordionpro.min.js', array('jquery'), '2.0.1', false);
+    wp_register_script('accordion_pro', plugin_dir_url(dirname(__FILE__)) . 'js/jquery.accordionpro.min.js', array('jquery'), '2.0.1', false);
   }
 
   /**
@@ -561,7 +561,7 @@ class accordion_pro {
     $ids = implode('-', $this->flatten($this->css_ids, array()));
 
     // load css
-    wp_enqueue_style('accordion_pro', WP_PLUGIN_URL . '/accordionpro_wp/css/accordionpro.css.php?ids=' . $ids);
+    wp_enqueue_style('accordion_pro', plugin_dir_url(dirname(__FILE__)) . 'css/accordionpro.css.php?ids=' . $ids);
   }
 
   /**
@@ -725,7 +725,9 @@ class accordion_pro {
 
         // write css to file (can't access WPDB from style php)
         if ($key === 'additional_css') {
-          if (file_put_contents(WP_PLUGIN_DIR . '/accordionpro_wp/css/additional.css', $setting) === false) {
+          $write = file_put_contents(plugin_dir_url(dirname(__FILE__)) . 'css/additional.css', $setting);
+
+          if ($write === false) {
             $this->notices[] = __('Error.', 'accordion_pro');
             return;
           }

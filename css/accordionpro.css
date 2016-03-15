@@ -1,11 +1,11 @@
 /*!
  * Plugin Name:    Accordion Pro JS - a responsive accordion plugin for jQuery
  * Plugin URI:     http://stitchui.com/accordion-pro-js/
- * Version:        2.0.3
- * Author:         Nicola Hibbert
+ * Version:        2.0.4
+ * Author:         Stitch UI
  * Author URI:     http://stitchui.com
  *
- * Copyright:      (c) 2011-2015 Stitch UI
+ * Copyright:      (c) 2011-2016 Stitch UI
  */
 
 /*********************************** CORE PLUGIN */
@@ -181,6 +181,16 @@ _::-webkit-full-page-media, _:future, :root .accordionPro .slide {
 .accordionPro.vertical .slide > :first-child {
   text-align: left;
   direction: ltr;
+  -webkit-transform: translateX(0) rotate(0);
+  -webkit-transform-origin: left top;
+  -moz-transform: translateX(0) rotate(0);
+  -moz-transform-origin: left top;
+  -ms-transform: translateX(0) rotate(0);
+  -ms-transform-origin: left top;
+  -o-transform: translateX(0) rotate(0);
+  -o-transform-origin: left top;
+  transform: translateX(0) rotate(0);
+  transform-origin: left top;
 }
 .accordionPro.vertical .slide > :first-child:after {
   left: auto;

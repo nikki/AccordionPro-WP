@@ -42,17 +42,20 @@
 			<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html">Text</a>
 			<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce">Visual</a>
 			<div id="wp-apeditor<?php echo $key + 1; ?>-media-buttons" class="wp-media-buttons">
-				<a href="#" class="button insert-media add-media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><img src="<?php echo WP_PLUGIN_URL; ?>/accordionpro_wp/css/media-button.png" width="15" height="15"> Add Media</a>
+				<a href="#" class="button insert-media add_media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>
 			</div>
 		</div>
 	<?php } else { // v4 ?>
 		<div id="wp-apeditor<?php echo $key + 1; ?>-editor-tools" class="wp-editor-tools">
 			<div id="wp-apeditor<?php echo $key + 1; ?>-media-buttons" class="wp-media-buttons">
-				<a href="#" class="button insert-media add-media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><img src="<?php echo WP_PLUGIN_URL; ?>/accordionpro_wp/css/media-button.png" width="15" height="15"> Add Media</a>
+				<a href="#" class="button insert-media add_media" id="apeditor<?php echo $key + 1; ?>-add_media" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>
 			</div>
 			<div class="wp-editor-tabs">
-				<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce">Visual</a>
-				<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html">Text</a>
+        <?php
+          $editorId = version_compare($wp_version, '4.3', '>=') ? " data-wp-editor-id='apeditor" . ($key + 1) . "'" : "";
+        ?>
+				<a id="apeditor<?php echo $key + 1; ?>-tmce" class="wp-switch-editor switch-tmce"<?php echo $editorId ?>>Visual</a>
+				<a id="apeditor<?php echo $key + 1; ?>-html" class="wp-switch-editor switch-html"<?php echo $editorId ?>>Text</a>
 			</div>
 		</div>
 	<?php } ?>

@@ -1,5 +1,14 @@
 ## CHANGELOG
 
+### v3.0.6 - 09/03/16
+  - Minor bug fix
+    - Fixed styles for vertical accordion when it's nested inside a horizontal accordion
+  - Changes to editor initialisation in WP 4.3
+  - Improved how the plugin loads CSS and JS assets
+
+### v3.0.5 - 11/06/16
+  - Bug fix: caption enabled checkbox
+
 ### v3.0.4 - 05/11/15
   - Updated Accordion Pro JS to v2.0.3 (new 'panel padding' option)
 

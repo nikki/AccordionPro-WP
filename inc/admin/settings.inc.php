@@ -62,7 +62,7 @@ if (!class_exists('WP')) {
     <div class="postbox">
       <h3><span>Keep Accordion Pro Updated</span></h3>
       <div class="inside">
-        <p>Sign up to the <a href="http://stitchui.com?APWP=1" target="_blank"><b>Stitch UI</b></a> newsletter, and you'll be the first to know when we release updates for Accordion Pro.</p>
+        <p>Sign up to the <a href="https://nicolahibbert.com?APWP=1" target="_blank"><b>Nicola Hibbert</b></a> newsletter, and you'll be the first to know when we release updates for Accordion Pro.</p>
         <form action="http://playzap.createsend.com/t/i/s/gjkkj/" method="post" id="ap-newsletter">
           <input id="fieldEmail" name="cm-gjkkj-gjkkj" type="email" placeholder="Email" required />
           <input id="fieldyhzty" name="cm-f-yhzty" type="hidden" value="APWP" />

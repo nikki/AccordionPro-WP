@@ -7,11 +7,11 @@ module.exports = function (grunt) {
               ' * Plugin URI:     http://accordionpro.nicolahibbert.com\n' +
               ' * Description:    Create jQuery powered responsive accordions to embed into your WordPress posts &amp; pages.\n' +
               ' * Version:        3.0.6\n' +
-              ' * Author:         Stitch UI\n' +
-              ' * Author URI:     http://stitchui.com/accordion-pro-wp/\n' +
+              ' * Author:         Nicola Hibbert\n' +
+              ' * Author URI:     https://nicolahibbert.com/accordion-pro-wp/\n' +
               ' * Text Domain:    accordion_pro\n' +
               ' * \n' +
-              ' * Copyright:      (c) 2011-2016 Stitch UI\n' +
+              ' * Copyright:      (c) 2011-2016 Nicola Hibbert\n' +
               ' * \n' +
               ' * This program is free software; you can redistribute it and/or modify\n' +
               ' * it under the terms of the GNU General Public License, version 2, as\n' +
